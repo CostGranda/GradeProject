@@ -127,34 +127,28 @@ export default function Footer() {
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
               <h5 class="mb-4 font-weight-bold">CONNECT WITH US</h5>
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Your Email Address"
-                />
-                <span class="input-group-addon" id="basic-addon2">
-                  <i class="fas fa-check"></i>
-                </span>
-              </div>
               <ul class="social-pet mt-4">
                 <li>
-                  <a href="#" title="facebook">
+                  <a
+                    href="https://www.facebook.com/pg/Perceptio-SAS-1061087157310289/photos/?ref=page_internal"
+                    title="facebook"
+                  >
                     <i class="fab fa-facebook-f"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="twitter">
-                    <i class="fab fa-twitter"></i>
+                  <a
+                    href="https://www.linkedin.com/company/perceptio-s-a-s-/"
+                    title="linkedin"
+                  >
+                    <i class="fab fa-linkedin"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="#" title="google-plus">
-                    <i class="fab fa-google-plus-g"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="instagram">
+                  <a
+                    href="https://www.instagram.com/perceptios.a.s/?hl=es-la"
+                    title="instagram"
+                  >
                     <i class="fab fa-instagram"></i>
                   </a>
                 </li>
