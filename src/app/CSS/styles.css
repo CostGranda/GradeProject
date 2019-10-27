@@ -1,64 +1,80 @@
+/*=-footer-=*/
 footer {
-  background: #222;
-  color: #aaa;
-  padding-top: 10px;
+  color: #fff;
+  background-attachment: fixed;
+  background-color: #222;
+  background-image: url(https://s7.postimg.org/uyf0oioaz/footer-bg.png);
+  background-size: cover;
+  background-position: bottom;
 }
-
+footer p {
+  color: #ccc;
+}
 footer a {
-  color: #aaa;
+  color: #ccc;
 }
-
-footer a:hover {
+.social-pet li {
+  display: inline-block;
+  margin-right: 10px;
+}
+.social-pet li a {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  text-align: center;
+  display: block;
+  line-height: 35px;
+  background-color: #3a5a95;
   color: #fff;
 }
-
-footer h3 {
-  color: #0894d1;
-  letter-spacing: 1px;
-  margin: 30px 0 20px;
+.social-pet li:nth-child(2) a {
+  background-color: #57aced;
 }
-
-footer .three-column {
-  overflow: hidden;
+.social-pet li:nth-child(3) a {
+  background-color: #dd4f43;
 }
-
-footer .three-column li {
-  width: 33.3333%;
+.social-pet li:nth-child(4) a {
+  background-color: #6b27b2;
+}
+.social-pet li a:hover {
+  background-color: #0141a2;
+}
+.social-pet li a:hover i {
+  transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+}
+.recent-post li {
+  display: block;
+  color: #ccc;
+  margin-bottom: 25px;
+}
+.recent-post li label {
   float: left;
-  padding: 5px 0;
+  border: 2px solid #ccc;
+  padding: 1px 7px;
+  text-align: center;
 }
-
-footer .socila-list {
-  overflow: hidden;
-  margin: 20px 0 10px;
+.recent-post li label span {
+  color: #fff;
 }
-
-footer .socila-list li {
-  float: left;
-  margin-right: 3px;
-  opacity: 0.7;
-  overflow: hidden;
-  border-radius: 50%;
-  transition: all 0.3s ease-in-out;
+footer .input-group-addon {
+  background-color: #0141a2;
+  padding: 10px;
 }
-
-footer .socila-list li:hover {
-  opacity: 1;
+.f-address li {
+  display: inline-block;
 }
-
-footer .img-thumbnail {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid #444;
-  margin-bottom: 5px;
+.f-address li i {
+  color: #2995de;
+  font-size: 18px;
 }
-
-footer .copyright {
-  padding: 15px 0;
-  background: #333;
-  margin-top: 20px;
-  font-size: 15px;
+.f-address li a {
+  color: #ccc;
 }
-
-footer .copyright span {
-  color: #0894d1;
+/*=-Copyright-=*/
+.copyright {
+  background-color: #111;
+  padding: 12px 0;
+  font-size: 14px;
 }
