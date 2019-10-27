@@ -3,7 +3,7 @@
 footer {
     color: #fff;
     background-attachment: fixed;
-    background-color: #222;
+    background-color: #34778c;
     background-image: url(https://s7.postimg.org/uyf0oioaz/footer-bg.png);
     background-size: cover;
     background-position: bottom;
@@ -94,7 +94,7 @@ footer .input-group-addon {
 /*=-Copyright-=*/
 
 .copyright {
-    background-color: #111;
+    background-color: #2f6c80;
     padding: 12px 0;
     font-size: 14px;
 }
