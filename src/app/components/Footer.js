@@ -7,149 +7,156 @@ export default function Footer() {
         href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
         rel="stylesheet"
       />
-      <footer class="pt-5 pb-4" id="contact">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
-              <h5 class="mb-4 font-weight-bold">ABOUT US</h5>
-              <p class="mb-4">Etiam laoreet in ex quis efficitur.</p>
-              <ul class="f-address">
+      <footer className="pt-5 pb-4" id="contact">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
+              <h5 className="mb-4 font-weight-bold">ABOUT US</h5>
+              <ul className="f-address">
                 <li>
-                  <div class="row">
-                    <div class="col-1">
-                      <i class="fas fa-map-marker"></i>
+                  <div className="row">
+                    <div className="col-1">
+                      <i className="fas fa-map-marker"></i>
                     </div>
-                    <div class="col-10">
-                      <h6 class="font-weight-bold mb-0">Address:</h6>
+                    <div className="col-10">
+                      <h6 className="font-weight-bold mb-0">Address:</h6>
+                      <p>Cra. 43b #1171, Medellín, Antioquia</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div className="row">
+                    <div className="col-1">
+                      <i className="far fa-envelope"></i>
+                    </div>
+                    <div className="col-10">
+                      <h6 className="font-weight-bold mb-0">
+                        Have any questions?
+                      </h6>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        <a href="#">perceptio@perceptio.net</a>
                       </p>
                     </div>
                   </div>
                 </li>
                 <li>
-                  <div class="row">
-                    <div class="col-1">
-                      <i class="far fa-envelope"></i>
+                  <div className="row">
+                    <div className="col-1">
+                      <i className="fas fa-phone-volume"></i>
                     </div>
-                    <div class="col-10">
-                      <h6 class="font-weight-bold mb-0">Have any questions?</h6>
+                    <div className="col-10">
+                      <h6 className="font-weight-bold mb-0">Phone:</h6>
                       <p>
-                        <a href="#">Support@userthemes.com</a>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="row">
-                    <div class="col-1">
-                      <i class="fas fa-phone-volume"></i>
-                    </div>
-                    <div class="col-10">
-                      <h6 class="font-weight-bold mb-0">Address:</h6>
-                      <p>
-                        <a href="#">+XX (0) XX XX-XXXX-XXXX</a>
+                        <a href="#">+57 (4) 4448800</a>
                       </p>
                     </div>
                   </div>
                 </li>
               </ul>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
-              <h5 class="mb-4 font-weight-bold">FRESH TWEETS</h5>
-              <ul class="f-address">
+            <div className="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
+              <h5 className="mb-4 font-weight-bold">OUR SERVICES</h5>
+              <ul className="f-address">
                 <li>
-                  <div class="row">
-                    <div class="col-1">
-                      <i class="fab fa-twitter"></i>
-                    </div>
-                    <div class="col-10">
-                      <p class="mb-0">
-                        <a href="#">@userthemesrel </a> HTML Version Out Now
-                      </p>
-                      <label>10 Mins Ago</label>
-                    </div>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/servicios/analitica/">Analytics</a>
+                    </p>
                   </div>
                 </li>
                 <li>
-                  <div class="row">
-                    <div class="col-1">
-                      <i class="fab fa-twitter"></i>
-                    </div>
-                    <div class="col-10">
-                      <p class="mb-0">
-                        <a href="#">@userthemesrel </a> HTML Version Out Now
-                      </p>
-                      <label>10 Mins Ago</label>
-                    </div>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/servicios/fabrica-de-software/">Software Factory</a>
+                    </p>
                   </div>
                 </li>
                 <li>
-                  <div class="row">
-                    <div class="col-1">
-                      <i class="fab fa-twitter"></i>
-                    </div>
-                    <div class="col-10">
-                      <p class="mb-0">
-                        <a href="#">@userthemesrel </a> HTML Version Out Now
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/servicios/movilidad/">Mobility</a>
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <li>
+                    <div className="col-10">
+                      <p className="mb-0">
+                        <a href="https://www.perceptio.co/servicios/innovacion/">Innovation</a>
                       </p>
-                      <label>10 Mins Ago</label>
                     </div>
+                  </li>
+                  <li>
+                    <div className="col-10">
+                      <p className="mb-0">
+                        <a href="https://www.perceptio.co/servicios/licenciamiento-sap/">SAP Licensing</a>
+                      </p>
+                    </div>
+                  </li>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/servicios/outsourcing/">Outsourcing</a>
+                    </p>
                   </div>
                 </li>
               </ul>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
-              <h5 class="mb-4 font-weight-bold">LATEST UPDATES</h5>
-              <ul class="recent-post">
+            <div className="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
+              <h5 className="mb-4 font-weight-bold">WORK WITH US</h5>
+              <ul className="f-address">
                 <li>
-                  <label class="mr-3">
-                    28 <br />
-                    <span>APR</span>
-                  </label>
-                  <span>Rendomised words which dont look eveable.</span>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/vacantes/">Vacancies</a>
+                    </p>
+                  </div>
                 </li>
                 <li>
-                  <label class="mr-3">
-                    29 <br />
-                    <span>APR</span>
-                  </label>
-                  <span>Rendomised words which dont look eveable.</span>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/por-que-perceptio/">Why PERCEPTIO</a>
+                    </p>
+                  </div>
                 </li>
                 <li>
-                  <label class="mr-3">
-                    30 <br />
-                    <span>APR</span>
-                  </label>
-                  <span>Rendomised words which dont look eveable.</span>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/plan-de-beneficios/">Benefits plan</a>
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/testimoniales/">Testimonials</a>
+                    </p>
+                  </div>
                 </li>
               </ul>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
-              <h5 class="mb-4 font-weight-bold">CONNECT WITH US</h5>
-              <ul class="social-pet mt-4">
+            <div className="col-lg-3 col-md-6 col-sm-6 mt-2 mb-4">
+              <h5 className="mb-4 font-weight-bold">CONNECT WITH US</h5>
+              <ul className="social-pet mt-4">
                 <li>
                   <a
                     href="https://www.facebook.com/pg/Perceptio-SAS-1061087157310289/photos/?ref=page_internal"
-                    title="facebook"
+                    title="Facebook"
                   >
-                    <i class="fab fa-facebook-f"></i>
+                    <i className="fab fa-facebook-f"></i>
                   </a>
                 </li>
                 <li>
                   <a
                     href="https://www.linkedin.com/company/perceptio-s-a-s-/"
-                    title="linkedin"
+                    title="Linkedin"
                   >
-                    <i class="fab fa-linkedin"></i>
+                    <i className="fab fa-linkedin"></i>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.instagram.com/perceptios.a.s/?hl=es-la"
-                    title="instagram"
-                  >
-                    <i class="fab fa-instagram"></i>
+                    href="https://www.instagram.com/perceptios.a.s/?hl=es-la" title="Instagram">
+                    <i className="fab fa-instagram"></i>
                   </a>
                 </li>
               </ul>
@@ -157,12 +164,12 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-      <section class="copyright">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 ">
-              <div class="text-center text-white">
-                &copy; 2018 Your Company. All Rights Reserved.
+      <section className="copyright">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 ">
+              <div className="text-center text-white">
+                &copy; 2019 All rights reserved
               </div>
             </div>
           </div>
