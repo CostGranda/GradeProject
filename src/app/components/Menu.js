@@ -35,6 +35,11 @@ export default function Menu() {
                 Alarms
               </a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/registre">
+                Registre
+              </a>
+            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"

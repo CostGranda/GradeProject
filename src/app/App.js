@@ -13,7 +13,8 @@ export default class App extends Component {
         <Router>
           <Menu />
           <Switch>
-            <Route exact path="/" component={ApplicantForm} />
+            <Route exact path="/" component={Login} />
+            <Route exact path="/registre" component={ApplicantForm} />
           </Switch>
           <Footer />
         </Router>

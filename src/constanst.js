@@ -1,0 +1,1 @@
+export const BASE_ENDPOINT = "https://happy-test2.herokuapp.com/api/";
