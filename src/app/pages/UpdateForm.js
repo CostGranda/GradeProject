@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 export default class componentName extends Component {
 
-    state = {
-        validado: false
-    };
-
     identificationRef = React.createRef();
     namesRef = React.createRef();
     surnamesRef = React.createRef();
@@ -30,22 +26,22 @@ export default class componentName extends Component {
             specialties = this.specialtiesRef.current.value,
             date = this.dateRef.current.value,
             comments = this.commentsRef.current.value,
-            califications = this.calificationsRef.current.value,
+            calification = this.calificationRef.current.value,
             state = this.stateRef.current.value,
             origin = this.originRef.current.value;
 
-            console.log(identification)
-            console.log(names)
-            console.log(surnames)
-            console.log(city)
-            console.log(email)
-            console.log(number)
-            console.log(specialties)
-            console.log(date)
-            console.log(comments)
-            console.log(califications)
-            console.log(state)
-            console.log(origin)
+        console.log(identification)
+        console.log(names)
+        console.log(surnames)
+        console.log(city)
+        console.log(email)
+        console.log(number)
+        console.log(specialties)
+        console.log(date)
+        console.log(comments)
+        console.log(calification)
+        console.log(state)
+        console.log(origin)
     };
 
     render() {
@@ -54,7 +50,7 @@ export default class componentName extends Component {
                 <form onSubmit={this.updateRow}>
                     <div className="form-row col-md-6">
                         <label htmlFor="inputId4">Identification number</label>
-                        <input ref={this.identificationRef} type="identification_number" className="form-control" id="inputId4" placeholder="Identification number" />
+                        <input ref={this.identificationRef} type="number" className="form-control" id="inputId4" placeholder="Identification number" />
                     </div>
                     <div className="form-row col-md-6">
                         <div className="form-group col-md-6">
@@ -82,9 +78,9 @@ export default class componentName extends Component {
                         <label htmlFor="inputContactNumber">Specialties</label>
                         <select ref={this.specialtiesRef} className="custom-select" required>
                             <option value="">Choose options...</option>
-                            <option value="1">ABAP</option>
-                            <option value="2">ABAP chimba</option>
-                            <option value="3">ABAP chimba x2</option>
+                            <option value="ABAP">ABAP</option>
+                            <option value="SD">SD</option>
+                            <option value="FI">FI</option>
                         </select>
                     </div>
                     <div className="form-group col-md-6">
@@ -93,23 +89,43 @@ export default class componentName extends Component {
                     </div>
                     <div className="form-group col-md-6">
                         <label htmlFor="inputcomments4">Comments</label>
-                        <input ref={this.commentsRef} type="comments" className="form-control" id="inputComments4" placeholder="Comments" />
+                        <input ref={this.commentsRef} type="text" className="form-control" id="inputComments4" placeholder="Comments" />
                     </div>
                     <div className="form-group col-md-6">
-                        <label htmlFor="inputCalifications4">Califications</label>
-                        <input ref={this.calificationsRef} type="califications" className="form-control" id="inputCalifications4" placeholder="Califications" />
+                        <label htmlFor="inputCalification">Calification</label>
+                        <select ref={this.calificationRef} className="custom-select" required>
+                            <option value="">Choose options...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                     </div>
                     <div className="form-group col-md-6">
-                        <label htmlFor="inputState4">State</label>
-                        <input ref={this.stateRef} type="state" className="form-control" id="inputState4" placeholder="State" />
+                        <label htmlFor="inputState">State</label>
+                        <select ref={this.stateRef} className="custom-select" required>
+                            <option value="">Choose options...</option>
+                            <option value="Hired">Hired</option>
+                            <option value="In process">In process</option>
+                        </select>
                     </div>
                     <div className="form-group col-md-6">
-                        <label htmlFor="inputOrigin4">Origin</label>
-                        <input ref={this.originRef} type="origin" className="form-control" id="inputOrigin4" placeholder="Origin" />
+                        <label htmlFor="inputOrigin">Origin</label>
+                        <select ref={this.originRef} className="custom-select" required>
+                            <option value="">Choose options...</option>
+                            <option value="Manual">Manual</option>
+                            <option value="Automatic">Automatic</option>
+                        </select>
                     </div>
                     <label htmlFor="inputFile">Choose file</label><br></br>
                     <div className="custom-file col-md-6">
-                        <input type="file" className="custom-file-input" id="validatedCustomFile"/>
+                        <input type="file" className="custom-file-input" id="validatedCustomFile" />
                         <label className="custom-file-label" htmlFor="validatedCustomFile">Choose file...</label>
                     </div>
                     <div className="content-center">
