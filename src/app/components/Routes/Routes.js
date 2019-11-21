@@ -16,7 +16,7 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      authed === false ? <Component {...props} /> : <Redirect to='/happiechupon' />
+      authed === false ? <Component {...props} /> : <Redirect to='/prueba' />
     }
   />
 )
@@ -26,7 +26,7 @@ const Routes = ({ authed }) => (
     <PrivateRoute
       authed={authed}
       exact
-      path='/happiechupon'
+      path='/prueba'
       component={ApplicantForm}
     />
     <PublicRoute path='/' authed={authed} exact component={Login} />
