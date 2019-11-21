@@ -2,7 +2,8 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Login from "./../../pages/Login";
 import ApplicantForm from "./../../pages/ApplicantForm";
-
+import UpdateForm from "./../../pages/UpdateForm";
+import EmptyPage from './../../pages/EmptyPage'
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
@@ -29,6 +30,13 @@ const Routes = ({ authed }) => (
       path='/happiechupon'
       component={ApplicantForm}
     />
+    <PrivateRoute
+      authed={authed}
+      exact
+      path='/UpdateForm'
+      component={UpdateForm}
+    />
+    <PublicRoute path='/Empty' authed={authed} exact component={EmptyPage} />
     <PublicRoute path='/' authed={authed} exact component={Login} />
   </Switch>
 )
