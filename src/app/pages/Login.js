@@ -7,8 +7,7 @@ export default class Login extends Component {
   state = {
     user: "",
     pass: "",
-    erroStatus: false,
-    error: "  "
+    erroStatus: false
   };
 
   handleInput = (e, keyText) => {
@@ -17,6 +16,10 @@ export default class Login extends Component {
       [keyText]: value,
       errorStatus: false
     });
+  };
+
+  handleChangeState = authd => {
+    this.props.handleChangeState(authd);
   };
 
   verifyCredentials = async e => {
@@ -28,10 +31,10 @@ export default class Login extends Component {
         password: pass
       });
       if (response) {
-        console.log(response);
         this.setState({
           errorStatus: false
         });
+        this.handleChangeState(true);
       }
     } catch (error) {
       this.setState({
@@ -45,30 +48,30 @@ export default class Login extends Component {
     return (
       <div className="container text-center login  ">
         <form className="form-signin" onSubmit={this.verifyCredentials}>
-          <h1 className="h3 tittle-login">SIGN IN</h1>
-          <label className="sr-only">Email address</label>
+          <h1 className="h3 tittle-login"> SIGN IN </h1>{" "}
+          <label className="sr-only"> Email address </label>{" "}
           <input
             type="email"
             className="form-control"
             placeholder="Email address"
             required
             onChange={e => this.handleInput(e, "user")}
-          />
-          <label className="sr-only">Password</label>
+          />{" "}
+          <label className="sr-only"> Password </label>{" "}
           <input
             type="password"
             className="form-control"
             placeholder="Password"
             required
             onChange={e => this.handleInput(e, "pass")}
-          />
+          />{" "}
           {this.state.errorStatus && (
             <Mensaje message={this.state.error} property="error" />
-          )}
+          )}{" "}
           <button className="btn btn-lg btn-primary btn-block" type="submit">
             Sign in
-          </button>
-        </form>
+          </button>{" "}
+        </form>{" "}
       </div>
     );
   }

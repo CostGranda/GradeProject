@@ -6,12 +6,23 @@ import "./CSS/styles.css";
 import Routes from "./components/Routes/Routes";
 
 export default class App extends Component {
+  state = {
+    authed: false
+  };
+
+  handleChangeState = authed => {
+    this.setState({ authed: authed });
+  };
+
   render() {
     return (
       <Fragment>
         <Router>
           <Menu />
-            <Routes authed={true} />
+          <Routes
+            authed={this.state.authed}
+            handleChangeState={this.handleChangeState}
+          />
           <Footer />
         </Router>
       </Fragment>
