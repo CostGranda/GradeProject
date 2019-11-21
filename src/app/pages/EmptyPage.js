@@ -80,7 +80,7 @@ function EmptyPage() {
                 <td>{item.state}</td>
                 <td>
                   {item.telefonos.map(telefono => (
-                    <p>{telefono}</p>
+                    <p key={telefono}>{telefono}</p>
                   ))}
                 </td>
                 <td><button className="btn btn-primary" onClick={()=>imprimir(item)}>Imprimir</button></td>
