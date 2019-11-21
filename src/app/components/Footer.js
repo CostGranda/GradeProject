@@ -79,20 +79,16 @@ export default function Footer() {
                   </div>
                 </li>
                 <li>
-                  <li>
-                    <div className="col-10">
-                      <p className="mb-0">
-                        <a href="https://www.perceptio.co/servicios/innovacion/">Innovation</a>
-                      </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="col-10">
-                      <p className="mb-0">
-                        <a href="https://www.perceptio.co/servicios/licenciamiento-sap/">SAP Licensing</a>
-                      </p>
-                    </div>
-                  </li>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/servicios/innovacion/">Innovation</a>
+                    </p>
+                  </div>
+                  <div className="col-10">
+                    <p className="mb-0">
+                      <a href="https://www.perceptio.co/servicios/licenciamiento-sap/">SAP Licensing</a>
+                    </p>
+                  </div>
                   <div className="col-10">
                     <p className="mb-0">
                       <a href="https://www.perceptio.co/servicios/outsourcing/">Outsourcing</a>
