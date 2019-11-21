@@ -12,8 +12,8 @@ export default class App extends Component {
       <Fragment>
         <Router>
           <Menu />
-            {/* <Routes authed={true} /> */}
-            <UpdateForm />
+            <Routes authed={false} />
+            {/* <UpdateForm /> */}
           <Footer />
         </Router>
       </Fragment>
