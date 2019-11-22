@@ -1,40 +1,77 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Mensaje from "../components/Message";
 import { BASE_ENDPOINT } from "../../constanst";
 
 export default class componentName extends Component {
-  identificationRef = React.createRef();
-  namesRef = React.createRef();
-  surnamesRef = React.createRef();
-  emailRef = React.createRef();
-  numberRef = React.createRef();
-  specialtesRef = React.createRef();
+  state = {
+    sucefullStatus: false,
+    errorStatus: false,
+    message: "",
+    identification: "",
+    number: "",
+    names: "",
+    surNames: "",
+    specialites: "",
+    email: ""
+  };
+
+  handleInput = (e, keyText) => {
+    const value = e.target.value;
+    this.setState({
+      [keyText]: value,
+      errorStatus: false,
+      sucefullStatus: false,
+      message: ""
+    });
+  };
 
   registre = async e => {
     e.preventDefault();
-    const identification = this.identificationRef.current.value,
-      names = this.namesRef.current.value,
-      surnames = this.surnamesRef.current.value,
-      email = this.emailRef.current.value,
-      number = this.numberRef.current.value,
-      specialites = this.specialtesRef.current.value;
+    const {
+      identification,
+      number,
+      names,
+      surNames,
+      specialites,
+      email
+    } = this.state;
 
     try {
       const response = await axios.post(`${BASE_ENDPOINT}applicants`, {
         cedula: identification,
         nombres: names,
-        apellidos: surnames,
+        apellidos: surNames,
         especialidades: [specialites],
         email: email,
         telefonos: [number],
-        cv: "Pruebas",
         origen: "Completado"
       });
-      if (response) {
-        console.log(response);
+      if (response.status === 201) {
+        this.setState({
+          sucefullStatus: true,
+          errorStatus: false,
+          message: "Usuario registrado con exito",
+          identification: "",
+          number: "",
+          names: "",
+          surNames: "",
+          specialites: "",
+          email: ""
+        });
+      } else if (response.status === 200) {
+        this.setState({
+          errorStatus: true,
+          sucefullStatus: false,
+          message: "Usuario ya esta registrado en nuestra DB"
+        });
       }
     } catch (err) {
-      console.log(err);
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "Error al realizar el registro, intente de nuevo"
+      });
     }
   };
 
@@ -46,10 +83,12 @@ export default class componentName extends Component {
             <div className="form-group col-md-6">
               <label>Identification number</label>
               <input
-                ref={this.identificationRef}
                 type="number"
                 className="form-control"
                 placeholder="Identification number"
+                onChange={e => this.handleInput(e, "identification")}
+                required
+                value={this.state.identification}
               />
             </div>
           </div>
@@ -57,43 +96,56 @@ export default class componentName extends Component {
             <div className="form-group col-md-6">
               <label>Names</label>
               <input
-                ref={this.namesRef}
                 type="text"
                 className="form-control"
                 placeholder="Names"
+                onChange={e => this.handleInput(e, "names")}
+                required
+                value={this.state.names}
               />
             </div>
             <div className="form-group col-md-6">
               <label>Surnames</label>
               <input
-                ref={this.surnamesRef}
                 type="text"
                 className="form-control"
                 placeholder="Surnames"
+                onChange={e => this.handleInput(e, "surNames")}
+                required
+                value={this.state.surNames}
               />
             </div>
           </div>
           <div className="form-group col-md-6">
             <label>Email</label>
             <input
-              ref={this.emailRef}
               type="email"
               className="form-control"
               placeholder="Email"
+              onChange={e => this.handleInput(e, "email")}
+              required
+              value={this.state.email}
             />
           </div>
           <div className="form-group col-md-6">
             <label>Contact number</label>
             <input
-              ref={this.numberRef}
               type="number"
               className="form-control"
               placeholder="Contact number"
+              onChange={e => this.handleInput(e, "number")}
+              required
+              value={this.state.number}
             />
           </div>
           <div className="form-group col-md-6">
             <label>Specialties</label>
-            <select ref={this.specialtesRef} className="custom-select" required>
+            <select
+              onChange={e => this.handleInput(e, "specialites")}
+              className="custom-select"
+              required
+              value={this.state.specialites}
+            >
               <option value="">Choose options...</option>
               <option value="ABAP">ABAP</option>
               <option value="ABAP2">ABAP chimba</option>
@@ -113,6 +165,12 @@ export default class componentName extends Component {
               </label>
             </div>
           </div>
+          {this.state.errorStatus && (
+            <Mensaje message={this.state.message} property="error" />
+          )}
+          {this.state.sucefullStatus && (
+            <Mensaje message={this.state.message} property="sucefull" />
+          )}
           <button type="submit" className="btn btn-primary ">
             Submit
           </button>

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Menu from "./components/Menu";
-import UpdateForm from "./pages/UpdateForm";
 import Footer from "./components/Footer";
 import "./CSS/styles.css";
 import Routes from "./components/Routes/Routes";

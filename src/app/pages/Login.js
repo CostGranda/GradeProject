@@ -30,7 +30,7 @@ export default class Login extends Component {
         email: usuario,
         password: pass
       });
-      if (response) {
+      if (response.status === 200) {
         this.setState({
           errorStatus: false
         });

@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./../../pages/Login";
 import ApplicantForm from "./../../pages/ApplicantForm";
 import UpdateForm from "./../../pages/UpdateForm";
-import EmptyPage from './../../pages/EmptyPage'
+import EmptyPage from "./../../pages/EmptyPage";
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
@@ -17,20 +17,19 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      authed === false ? <Component {...rest} /> : <Redirect to="/ingreso" />
+      authed === false ? <Component {...rest} /> : <Redirect to="/Empty" />
     }
   />
 );
 
 const Routes = ({ authed, handleChangeState }) => (
   <Switch>
-    <PrivateRoute
+    <PublicRoute
       authed={authed}
       exact
-      path="/ingreso"
+      path="/registre"
       component={ApplicantForm}
     />
-<<<<<<< HEAD
     <PublicRoute
       path="/"
       authed={authed}
@@ -38,16 +37,13 @@ const Routes = ({ authed, handleChangeState }) => (
       exact
       component={Login}
     />
-=======
     <PrivateRoute
       authed={authed}
       exact
-      path='/UpdateForm'
+      path="/UpdateForm"
       component={UpdateForm}
     />
-    <PublicRoute path='/Empty' authed={authed} exact component={EmptyPage} />
-    <PublicRoute path='/' authed={authed} exact component={Login} />
->>>>>>> 2ec643801badf30e5e73d24fa63310b8ed311a0b
+    <PrivateRoute path="/Empty" authed={authed} exact component={EmptyPage} />
   </Switch>
 );
 
