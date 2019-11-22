@@ -1,45 +1,50 @@
-import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./../../pages/Login";
 import ApplicantForm from "./../../pages/ApplicantForm";
 import UpdateForm from "./../../pages/UpdateForm";
-import EmptyPage from './../../pages/EmptyPage'
+import EmptyPage from "./../../pages/EmptyPage";
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      authed === true ? <Component {...props} /> : <Redirect to='/' />
+      authed === true ? <Component {...props} /> : <Redirect to="/" />
     }
   />
-)
+);
 
 const PublicRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      authed === false ? <Component {...props} /> : <Redirect to='/prueba' />
+      authed === false ? <Component {...rest} /> : <Redirect to="/Empty" />
     }
   />
-)
+);
 
-const Routes = ({ authed }) => (
+const Routes = ({ authed, handleChangeState }) => (
   <Switch>
-    <PrivateRoute
+    <PublicRoute
       authed={authed}
       exact
-      path='/prueba'
+      path="/registre"
       component={ApplicantForm}
     />
+    <PublicRoute
+      path="/"
+      authed={authed}
+      handleChangeState={handleChangeState}
+      exact
+      component={Login}
+    />
     <PrivateRoute
       authed={authed}
       exact
-      path='/UpdateForm'
+      path="/UpdateForm"
       component={UpdateForm}
     />
-    <PublicRoute path='/Empty' authed={authed} exact component={EmptyPage} />
-    <PublicRoute path='/' authed={authed} exact component={Login} />
+    <PrivateRoute path="/Empty" authed={authed} exact component={EmptyPage} />
   </Switch>
-)
+);
 
-export default Routes
-
+export default Routes;

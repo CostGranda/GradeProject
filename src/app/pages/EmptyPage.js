@@ -1,5 +1,37 @@
 import React, { useEffect, useState, useMemo } from "react";
 
+function SelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set()
+    preFilteredRows.forEach(row => {
+      options.add(row.values[id])
+    })
+    return [...options.values()]
+  }, [id, preFilteredRows])
+
+  // Render a multi-select box
+  return (
+    <select
+      value={filterValue}
+      onChange={e => {
+        setFilter(e.target.value || undefined)
+      }}
+    >
+      <option value="">All</option>
+      {options.map((option, i) => (
+        <option key={i} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  )
+}
+
+
 function EmptyPage() {
   const [data, setData] = useState();
   const headers = useMemo(
@@ -25,7 +57,7 @@ function EmptyPage() {
   const imprimir = item => {
     console.log("item", item)
 
-    const filtro = data.filter( item => item.telefonos.includes(123123123));
+    const filtro = data.filter(item => item.telefonos.includes(123123123));
     console.log(filtro, "Filtro telefono")
   }
 
@@ -54,7 +86,7 @@ function EmptyPage() {
   return (
     <>
       {data && (
-        <table class="table table-striped">
+        <table className="table table-striped">
           <thead>
             <tr>
               {headers.map(header => (
@@ -83,7 +115,7 @@ function EmptyPage() {
                     <p key={telefono}>{telefono}</p>
                   ))}
                 </td>
-                <td><button className="btn btn-primary" onClick={()=>imprimir(item)}>Imprimir</button></td>
+                <td><button className="btn btn-primary" onClick={() => imprimir(item)}>Imprimir</button></td>
               </tr>
             ))}
           </tbody>
