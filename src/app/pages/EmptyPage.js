@@ -4,30 +4,33 @@ function EmptyPage() {
   const [data, setData] = useState();
   const headers = useMemo(
     () => [
-      "apellidos",
-      "calificacion",
       "cedula",
-      "ciudad",
-      "comentarios",
-      "cv",
-      "disponibilidad",
-      "email",
-      "especialidades",
       "nombres",
-      "origen",
+      "apellidos",
+      "ciudad",
+      "especialidades",
+      "disponibilidad",
+      "calificacion",
+      "telefono",
+      "email",
       "skype",
+      "origen",
       "state",
-      "telefono"
+      "cv",
+      "comentarios"
     ],
     []
   );
 
-  const imprimir = item => {
-    console.log("item", item)
+  // const delete = item => {};
+  // const update = item => {};
 
-    const filtro = data.filter( item => item.telefonos.includes(123123123));
-    console.log(filtro, "Filtro telefono")
-  }
+  // const imprimir = item => {
+  //   console.log("item", item)
+
+  //   const filtro = data.filter( item => item.telefonos.includes(123123123));
+  //   console.log(filtro, "Filtro telefono")
+  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,25 +68,40 @@ function EmptyPage() {
           <tbody>
             {data.map(item => (
               <tr key={item.cedula}>
-                <td>{item.apellidos}</td>
-                <td>{item.calificacion}</td>
                 <td>{item.cedula}</td>
-                <td>{item.ciudad}</td>
-                <td>{item.comentarios}</td>
-                <td>{item.cv}</td>
-                <td>{item.disponibilidad}</td>
-                <td>{item.email}</td>
-                <td>{item.especialidades}</td>
                 <td>{item.nombres}</td>
-                <td>{item.origen}</td>
-                <td>{item.skype}</td>
-                <td>{item.state}</td>
+                <td>{item.apellidos}</td>
+                <td>{item.ciudad}</td>
+                <td>{item.especialidades}</td>
+                <td>{item.disponibilidad}</td>
+                <td>{item.calificacion}</td>
                 <td>
                   {item.telefonos.map(telefono => (
                     <p key={telefono}>{telefono}</p>
                   ))}
                 </td>
-                <td><button className="btn btn-primary" onClick={()=>imprimir(item)}>Imprimir</button></td>
+                <td>{item.email}</td>
+                <td>{item.skype}</td>
+                <td>{item.origen}</td>
+                <td>{item.state}</td>
+                <td>{item.cv}</td>
+                <td>{item.comentarios}</td>
+                {/* <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => delet(item)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => update(item)}
+                  >
+                    Actualizar
+                  </button>
+                </td> */}
               </tr>
             ))}
           </tbody>
