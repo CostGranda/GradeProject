@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useTable, useFilters } from "react-table";
+import matchSorter from 'match-sorter'
 
 function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },

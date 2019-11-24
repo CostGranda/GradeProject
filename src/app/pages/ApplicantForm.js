@@ -160,7 +160,8 @@ export default class componentName extends Component {
             <div className="form-check">
               <input className="form-check-input" type="checkbox" required />
               <label className="form-check-label">
-                I have read and accept the <a href="#">Terms and conditions</a>{" "}
+                I have read and accept the
+                <a target="_blank" href="https://happy-test2.herokuapp.com/api/terms"> Terms and conditions </a>
                 and the use of my data in accordance with the Habeas Data Law.
               </label>
             </div>
@@ -169,7 +170,7 @@ export default class componentName extends Component {
             <Mensaje message={this.state.message} property="error" />
           )}
           {this.state.sucefullStatus && (
-            <Mensaje message={this.state.message} property="sucefull" />
+            <Mensaje message={this.state.message} property="succesfull" />
           )}
           <button type="submit" className="btn btn-primary ">
             Submit
