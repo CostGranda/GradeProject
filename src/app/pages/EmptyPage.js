@@ -34,7 +34,7 @@ function EmptyPage() {
         Header: 'Specialty',
         accessor: 'especialidades',
         Filter: SelectColumnFilter,
-        filter: 'includes',
+        filter: 'equals',
       },
       {
         Header: 'Availability',
