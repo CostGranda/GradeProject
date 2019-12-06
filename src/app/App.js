@@ -4,6 +4,7 @@ import Menu from "./components/Menu";
 import Footer from "./components/Footer";
 import "./CSS/styles.css";
 import Routes from "./components/Routes/Routes";
+import ApplicantForm from "./pages/UpdateForm";
 
 export default class App extends Component {
   state = {
@@ -23,6 +24,8 @@ export default class App extends Component {
             authed={this.state.authed}
             handleChangeState={this.handleChangeState}
           />
+          {/* <ApplicantForm /> */}
+          
           <Footer />
         </Router>
       </Fragment>
