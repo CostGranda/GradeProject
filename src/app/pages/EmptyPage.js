@@ -1,33 +1,90 @@
 import React, { useEffect, useState, useMemo } from "react";
+import SelectColumnFilter from '../components/Table/components/SelectColumnFilter';
+import SliderColumnFilter from '../components/Table/components/SliderColumnFilter';
+import Table from "../components/Table";
+
+import './Empty.scss'
 
 function EmptyPage() {
   const [data, setData] = useState();
-  const headers = useMemo(
+
+  const columnsTable = useMemo(
     () => [
-      "apellidos",
-      "calificacion",
-      "cedula",
-      "ciudad",
-      "comentarios",
-      "cv",
-      "disponibilidad",
-      "email",
-      "especialidades",
-      "nombres",
-      "origen",
-      "skype",
-      "state",
-      "telefono"
+      {
+        Header: 'ID Number',
+        accessor: 'cedula',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'Names',
+        accessor: 'nombres',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'Surnames',
+        accessor: 'apellidos',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'City',
+        accessor: 'ciudad',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'Specialty',
+        accessor: 'especialidades',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+      },
+      {
+        Header: 'Availability',
+        accessor: 'disponibilidad',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'Calification',
+        accessor: 'calificacion',
+        Filter: SliderColumnFilter,
+        filter: 'equals',
+      },
+      {
+        Header: 'Phones',
+        accessor: 'telefonos',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'Email',
+        accessor: 'email',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'Skype',
+        accessor: 'skype',
+        filter: 'fuzzyText',
+      },
+      {
+        Header: 'Origin',
+        accessor: 'origen',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+      },
+      {
+        Header: 'State',
+        accessor: 'state',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+      },
+      {
+        Header: 'CV',
+        accessor: 'cv',
+      },
+      {
+        Header: 'Comments',
+        accessor: 'comentarios',
+      },
     ],
     []
   );
-
-  const imprimir = item => {
-    console.log("item", item)
-
-    const filtro = data.filter( item => item.telefonos.includes(123123123));
-    console.log(filtro, "Filtro telefono")
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,15 +94,14 @@ function EmptyPage() {
           method: "GET",
           headers: {
             Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3MzQzMTg4NywiZXhwIjoxNTc0NjQxNDg3fQ.lmkR7W8uIxDBH6L8230Fr6I9-nsfCeNPTTo8waZWfns"
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NTI4NjU2MiwiZXhwIjoxNTc2NDk2MTYyfQ.OJ8iiM_bovHAt0V8-yoBVKpTvwTEjqrw4Uxyzup7Mtg"
           },
           mode: "cors"
         }
       );
-
       let data = await response.json();
-      console.log(data);
-      setData(data);
+      const newData = data.map( item => ({...item, disponibilidad:  item.disponibilidad ? new Date(item.disponibilidad).toDateString() : undefined }))
+      setData(newData);
     };
 
     fetchData();
@@ -54,40 +110,9 @@ function EmptyPage() {
   return (
     <>
       {data && (
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              {headers.map(header => (
-                <th scope="col">{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(item => (
-              <tr key={item.cedula}>
-                <td>{item.apellidos}</td>
-                <td>{item.calificacion}</td>
-                <td>{item.cedula}</td>
-                <td>{item.ciudad}</td>
-                <td>{item.comentarios}</td>
-                <td>{item.cv}</td>
-                <td>{item.disponibilidad}</td>
-                <td>{item.email}</td>
-                <td>{item.especialidades}</td>
-                <td>{item.nombres}</td>
-                <td>{item.origen}</td>
-                <td>{item.skype}</td>
-                <td>{item.state}</td>
-                <td>
-                  {item.telefonos.map(telefono => (
-                    <p key={telefono}>{telefono}</p>
-                  ))}
-                </td>
-                <td><button className="btn btn-primary" onClick={()=>imprimir(item)}>Imprimir</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className='table-container'>
+          <Table  columns={columnsTable} data={data}/>
+        </div>
       )}
     </>
   );
