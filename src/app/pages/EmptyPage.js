@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
-import SelectColumnFilter from '../components/Table/components/SelectColumnFilter';
-import SliderColumnFilter from '../components/Table/components/SliderColumnFilter';
+import SelectColumnFilter from "../components/Table/components/SelectColumnFilter";
+import SliderColumnFilter from "../components/Table/components/SliderColumnFilter";
 import Table from "../components/Table";
 
-import './Empty.scss'
+import "./Empty.scss";
 
 function EmptyPage() {
   const [data, setData] = useState();
@@ -11,77 +11,77 @@ function EmptyPage() {
   const columnsTable = useMemo(
     () => [
       {
-        Header: 'ID Number',
-        accessor: 'cedula',
-        filter: 'fuzzyText',
+        Header: "ID Number",
+        accessor: "cedula",
+        filter: "fuzzyText"
       },
       {
-        Header: 'Names',
-        accessor: 'nombres',
-        filter: 'fuzzyText',
+        Header: "Names",
+        accessor: "nombres",
+        filter: "fuzzyText"
       },
       {
-        Header: 'Surnames',
-        accessor: 'apellidos',
-        filter: 'fuzzyText',
+        Header: "Surnames",
+        accessor: "apellidos",
+        filter: "fuzzyText"
       },
       {
-        Header: 'City',
-        accessor: 'ciudad',
-        filter: 'fuzzyText',
+        Header: "City",
+        accessor: "ciudad",
+        filter: "fuzzyText"
       },
       {
-        Header: 'Specialty',
-        accessor: 'especialidades',
+        Header: "Specialty",
+        accessor: "especialidades",
         Filter: SelectColumnFilter,
-        filter: 'equals',
+        filter: "equals"
       },
       {
-        Header: 'Availability',
-        accessor: 'disponibilidad',
-        filter: 'fuzzyText',
+        Header: "Availability",
+        accessor: "disponibilidad",
+        filter: "fuzzyText"
       },
       {
-        Header: 'Calification',
-        accessor: 'calificacion',
+        Header: "Calification",
+        accessor: "calificacion",
         Filter: SliderColumnFilter,
-        filter: 'equals',
+        filter: "equals"
       },
       {
-        Header: 'Phones',
-        accessor: 'telefonos',
-        filter: 'fuzzyText',
+        Header: "Phones",
+        accessor: "telefonos",
+        filter: "fuzzyText"
       },
       {
-        Header: 'Email',
-        accessor: 'email',
-        filter: 'fuzzyText',
+        Header: "Email",
+        accessor: "email",
+        filter: "fuzzyText"
       },
       {
-        Header: 'Skype',
-        accessor: 'skype',
-        filter: 'fuzzyText',
+        Header: "Skype",
+        accessor: "skype",
+        filter: "fuzzyText"
       },
       {
-        Header: 'Origin',
-        accessor: 'origen',
+        Header: "Origin",
+        accessor: "origen",
         Filter: SelectColumnFilter,
-        filter: 'includes',
+        filter: "includes"
       },
       {
-        Header: 'State',
-        accessor: 'state',
+        Header: "State",
+        accessor: "state",
         Filter: SelectColumnFilter,
-        filter: 'includes',
+        filter: "includes"
       },
       {
-        Header: 'CV',
-        accessor: 'cv',
+        Header: "CV",
+        accessor: "cv"
       },
       {
-        Header: 'Comments',
-        accessor: 'comentarios',
-      },
+        Header: "Comments",
+        accessor: "comentarios"
+      }
     ],
     []
   );
@@ -100,7 +100,12 @@ function EmptyPage() {
         }
       );
       let data = await response.json();
-      const newData = data.map( item => ({...item, disponibilidad:  item.disponibilidad ? new Date(item.disponibilidad).toDateString() : undefined }))
+      const newData = data.map(item => ({
+        ...item,
+        disponibilidad: item.disponibilidad
+          ? new Date(item.disponibilidad).toDateString()
+          : undefined
+      }));
       setData(newData);
     };
 
@@ -110,8 +115,13 @@ function EmptyPage() {
   return (
     <>
       {data && (
-        <div className='table-container'>
-          <Table  columns={columnsTable} data={data} createRoute="/createDataBase" />
+        <div className="table-container">
+          <Table
+            columns={columnsTable}
+            data={data}
+            createRoute="/createDataBase"
+            updateRoute="/UpdateAplicant"
+          />
         </div>
       )}
     </>

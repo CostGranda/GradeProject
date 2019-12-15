@@ -31,6 +31,11 @@ function ApplicantTablePage() {
       {
         Header: "Comments",
         accessor: "description"
+      },
+      {
+        Header: "Date",
+        accessor: "Date",
+        filter: "fuzzyText"
       }
     ],
     []
@@ -62,15 +67,21 @@ function ApplicantTablePage() {
     fetchData();
   }, []);
 
-    return (
-        <>
-            {data && (
-                <div className='table-container'>
-                    <Table columns={columnsTable} data={data} createRoute="/createApplicant" />
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      {" "}
+      {data && (
+        <div className="table-container">
+          <Table
+            columns={columnsTable}
+            data={data}
+            createRoute="/createAlarm"
+            updateRoute="/UpdateAlarm"
+          />
+        </div>
+      )}{" "}
+    </>
+  );
 }
 
 export default ApplicantTablePage;

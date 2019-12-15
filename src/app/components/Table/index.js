@@ -1,12 +1,11 @@
-import React from 'react';
-import { useTable, useFilters } from 'react-table'
-import { NavLink } from 'react-router-dom'
-import fuzzyTextFilterFn from './components/Fuzzy';
-import DefaultColumnFilter from './components/DefaultColumnFilter';
+import React from "react";
+import { useTable, useFilters } from "react-table";
+import { NavLink } from "react-router-dom";
+import fuzzyTextFilterFn from "./components/Fuzzy";
+import DefaultColumnFilter from "./components/DefaultColumnFilter";
+import "./table.scss";
 
-import './table.scss'
-
-function Table({ columns, data, createRoute }) {
+function Table({ columns, data, createRoute, updateRoute }) {
   const filterTypes = React.useMemo(
     () => ({
       fuzzyText: fuzzyTextFilterFn,
@@ -16,8 +15,8 @@ function Table({ columns, data, createRoute }) {
           const rowValue = row.values[id];
           return rowValue !== undefined
             ? String(rowValue)
-              .toLowerCase()
-              .startsWith(String(filterValue).toLowerCase())
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
             : true;
         });
       }
@@ -33,22 +32,23 @@ function Table({ columns, data, createRoute }) {
   );
 
   const deleteItem = item => {
-    console.log(item.original);
+    console.log(item);
     const fetchDelete = async () => {
       const id = item.original.identification
         ? item.original.identification
         : item.original.cedula;
-      const response = await fetch(
-        `https://happy-test2.herokuapp.com/api/alerts/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
-          },
-          mode: "cors"
-        }
-      );
+
+      const URL = item.original.identification
+        ? "https://happy-test2.herokuapp.com/api/alerts/"
+        : "https://happy-test2.herokuapp.com/api/applicants/";
+      const response = await fetch(`${URL}${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization:
+            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+        },
+        mode: "cors"
+      });
       let data = await response.json();
       console.log(data);
     };
@@ -103,27 +103,29 @@ function Table({ columns, data, createRoute }) {
                   );
                 })}
                 <td>
-                  <button type="button" class="btn btn-warning">
-                    <svg
-                      class="bi bi-pencil"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M13.293 3.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM14 4l2 2-9 9-3 1 1-3 9-9z"
-                        clip-rule="evenodd"
-                      ></path>
-                      <path
-                        fill-rule="evenodd"
-                        d="M14.146 8.354l-2.5-2.5.708-.708 2.5 2.5-.708.708zM5 12v.5a.5.5 0 00.5.5H6v.5a.5.5 0 00.5.5H7v.5a.5.5 0 00.5.5H8v-1.5a.5.5 0 00-.5-.5H7v-.5a.5.5 0 00-.5-.5H5z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
+                  <NavLink to={`${updateRoute}/${row.cells[0].value}`}>
+                    <button type="button" class="btn btn-warning">
+                      <svg
+                        class="bi bi-pencil"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M13.293 3.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM14 4l2 2-9 9-3 1 1-3 9-9z"
+                          clip-rule="evenodd"
+                        ></path>
+                        <path
+                          fill-rule="evenodd"
+                          d="M14.146 8.354l-2.5-2.5.708-.708 2.5 2.5-.708.708zM5 12v.5a.5.5 0 00.5.5H6v.5a.5.5 0 00.5.5H7v.5a.5.5 0 00.5.5H8v-1.5a.5.5 0 00-.5-.5H7v-.5a.5.5 0 00-.5-.5H5z"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                    </button>
+                  </NavLink>
                 </td>
                 <td>
                   <button
@@ -153,11 +155,12 @@ function Table({ columns, data, createRoute }) {
         </tbody>
       </table>
       <div className="container">
-        <NavLink className="create-button" to={createRoute}>+</NavLink>
+        <NavLink className="create-button" to={createRoute}>
+          +
+        </NavLink>
       </div>
     </>
   );
-
 }
 
 export default Table;

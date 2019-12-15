@@ -3,9 +3,9 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./../../pages/Login";
 import ApplicantForm from "./../../pages/ApplicantForm";
 import UpdateForm from "./../../pages/UpdateForm";
+import UpdateAlarm from "./../../pages/UpdateAlarm";
 import EmptyPage from "./../../pages/EmptyPage";
 import ApplicantTablePage from "./../../pages/ApplicantTablePage";
-
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
@@ -52,8 +52,25 @@ const Routes = ({ authed, handleChangeState }) => (
       path="/createDataBase"
       component={UpdateForm}
     />
+    <PrivateRoute
+      authed={authed}
+      exact
+      path="/UpdateAplicant/:id"
+      component={UpdateForm}
+    />
+    <PrivateRoute
+      authed={authed}
+      exact
+      path="/UpdateAlarm/:id"
+      component={UpdateAlarm}
+    />
     <PrivateRoute path="/Empty" authed={authed} exact component={EmptyPage} />
-    <PrivateRoute path="/ApplicantTable" authed={authed} exact component={ApplicantTablePage} />
+    <PrivateRoute
+      path="/ApplicantTable"
+      authed={authed}
+      exact
+      component={ApplicantTablePage}
+    />
   </Switch>
 );
 
