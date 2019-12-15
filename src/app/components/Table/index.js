@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTable, useFilters } from 'react-table'
-
+import { NavLink  } from 'react-router-dom'
 import fuzzyTextFilterFn from './components/Fuzzy';
 import DefaultColumnFilter from './components/DefaultColumnFilter';
 
 import './table.scss'
 
-function Table({ columns, data }) {
+function Table({ columns, data, createRoute }) {
   const filterTypes = React.useMemo(
     () => ({
       fuzzyText: fuzzyTextFilterFn,
@@ -50,7 +50,7 @@ function Table({ columns, data }) {
   )
 
   return (
-
+    <>
       <table className="table table-striped" {...getTableProps()}>
         <thead className="header-table">
           {headerGroups.map(headerGroup => (
@@ -81,7 +81,10 @@ function Table({ columns, data }) {
           )}
         </tbody>
       </table>
-
+      <div className="container">
+           <NavLink className="create-button" to={createRoute}>+</NavLink>       
+      </div>
+    </>
   )
 }
 
