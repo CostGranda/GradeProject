@@ -94,7 +94,7 @@ function EmptyPage() {
           method: "GET",
           headers: {
             Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NTI4NjU2MiwiZXhwIjoxNTc2NDk2MTYyfQ.OJ8iiM_bovHAt0V8-yoBVKpTvwTEjqrw4Uxyzup7Mtg"
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
           },
           mode: "cors"
         }
