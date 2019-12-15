@@ -23,9 +23,8 @@ export default class App extends Component {
           <Routes
             authed={this.state.authed}
             handleChangeState={this.handleChangeState}
-          />
-          {/* <ApplicantForm /> */}
-          
+            />
+            {/* <ApplicantForm /> */}          
           <Footer />
         </Router>
       </Fragment>
