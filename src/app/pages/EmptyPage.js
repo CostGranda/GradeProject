@@ -111,7 +111,7 @@ function EmptyPage() {
     <>
       {data && (
         <div className='table-container'>
-          <Table  columns={columnsTable} data={data}/>
+          <Table  columns={columnsTable} data={data} createRoute="/createDataBase" />
         </div>
       )}
     </>

@@ -5,6 +5,8 @@ import ApplicantForm from "./../../pages/ApplicantForm";
 import UpdateForm from "./../../pages/UpdateForm";
 import EmptyPage from "./../../pages/EmptyPage";
 import ApplicantTablePage from "./../../pages/ApplicantTablePage";
+
+
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
@@ -53,8 +55,14 @@ const Routes = ({ authed, handleChangeState }) => (
       path="/UpdateForm"
       component={UpdateForm}
     />
+    <PrivateRoute
+      authed={authed}
+      exact
+      path="/createDataBase"
+      component={UpdateForm}
+    />
     <PrivateRoute path="/Empty" authed={authed} exact component={EmptyPage} />
-    {/* <PrivateRoute path="/ApplicantTable" authed={authed} exact component={ApplicantTablePage} /> */}
+    <PrivateRoute path="/ApplicantTable" authed={authed} exact component={ApplicantTablePage} />
   </Switch>
 );
 
