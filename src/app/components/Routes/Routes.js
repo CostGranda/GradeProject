@@ -25,15 +25,6 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => (
   />
 );
 
-// const PublicRoute = ({ component: Component, authed, ...rest }) => (
-//   <Route
-//     {...rest}
-//     render={props =>
-//       authed === false ? <Component {...rest} /> : <Redirect to="/ApplicantTable" />
-//     }
-//   />
-// );
-
 const Routes = ({ authed, handleChangeState }) => (
   <Switch>
     <PublicRoute
