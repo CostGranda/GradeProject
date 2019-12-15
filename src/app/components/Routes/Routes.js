@@ -14,23 +14,27 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   />
 );
 
-// const PublicRoute = ({ component: Component, authed, ...rest }) => (
-//   <Route
-//     {...rest}
-//     render={props =>
-//       authed === false ? <Component {...rest} /> : <Redirect to="/Empty" />
-//     }
-//   />
-// );
-
 const PublicRoute = ({ component: Component, authed, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      authed === false ? <Component {...rest} /> : <Redirect to="/ApplicantTable" />
+      authed === false ? <Component {...rest} /> : <Redirect to="/Empty" />
     }
   />
 );
+
+// const PublicRoute = ({ component: Component, authed, ...rest }) => (
+//   <Route
+//     {...rest}
+//     render={props =>
+//       authed === false ? (
+//         <Component {...rest} />
+//       ) : (
+//         <Redirect to="/ApplicantTable" />
+//       )
+//     }
+//   />
+// );
 
 const Routes = ({ authed, handleChangeState }) => (
   <Switch>
@@ -53,8 +57,13 @@ const Routes = ({ authed, handleChangeState }) => (
       path="/UpdateForm"
       component={UpdateForm}
     />
-    {/* <PrivateRoute path="/Empty" authed={authed} exact component={EmptyPage} /> */}
-    <PrivateRoute path="/ApplicantTable" authed={authed} exact component={ApplicantTablePage} />
+    <PrivateRoute path="/Empty" authed={authed} exact component={EmptyPage} />
+    {/* <PrivateRoute
+      path="/ApplicantTable"
+      authed={authed}
+      exact
+      component={ApplicantTablePage}
+    /> */}
   </Switch>
 );
 
