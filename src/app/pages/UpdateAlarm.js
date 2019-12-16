@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 
 export default class componentName extends Component {
-  identificationRef = React.createRef();
-  descriptionRef = React.createRef();
-  dateRef = React.createRef();
+  state = {
+    identification: "",
+    date: "",
+    description: ""
+  };
+
+  handleInput = (e, keyText) => {
+    const value = e.target.value;
+    this.setState({
+      [keyText]: value
+    });
+  };
 
   updateRow = event => {
     event.preventDefault(); //Detener la funcion por defecto
-    const identification = this.identificationRef.current.value,
-      description = this.descriptionRef.current.value,
-      date = this.dateRef.current.value;
   };
-
-  //   componentDidMount() {
-  //     console.log("Component did moutn");
-  //   }
 
   render() {
     return (
@@ -23,17 +25,18 @@ export default class componentName extends Component {
           <div className="form-row col-md-6">
             <label htmlFor="inputId4">Identification number</label>
             <input
-              ref={this.identificationRef}
+              value={this.state.identification}
               type="number"
               className="form-control"
               id="inputId4"
               placeholder="Identification number"
+              onChange={e => this.handleInput(e, "identification")}
             />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputDate">Date</label>
             <input
-              ref={this.dateRef}
+              value={this.state.date}
               type="date"
               className="form-control"
               id="inputSurname4"
@@ -43,10 +46,11 @@ export default class componentName extends Component {
           <div className="form-group col-md-6">
             <label htmlFor="exampleFormControlTextarea2">Description</label>
             <textarea
-              ref={this.descriptionRef}
+              value={this.state.description}
               class="form-control rounded-0"
               id="exampleFormControlTextarea2"
               rows="3"
+              onChange={e => this.handleInput(e, "identification")}
             ></textarea>
           </div>
           <div className="content-center">

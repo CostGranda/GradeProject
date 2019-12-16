@@ -6,6 +6,8 @@ import UpdateForm from "./../../pages/UpdateForm";
 import UpdateAlarm from "./../../pages/UpdateAlarm";
 import EmptyPage from "./../../pages/EmptyPage";
 import ApplicantTablePage from "./../../pages/ApplicantTablePage";
+import createDataBase from "./../../pages/createDataBase";
+import createAlarm from "./../../pages/createAlarm";
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
   <Route
@@ -43,15 +45,15 @@ const Routes = ({ authed, handleChangeState }) => (
     <PrivateRoute
       authed={authed}
       exact
-      path="/UpdateForm"
-      component={UpdateForm}
+      path="/createDataBase"
+      component={createDataBase}
     />
     <PrivateRoute
       authed={authed}
       exact
-      path="/createDataBase"
-      component={UpdateForm}
-    />
+      path="/createAlarm"
+      component={createAlarm}
+    />    
     <PrivateRoute
       authed={authed}
       exact
