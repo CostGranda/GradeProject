@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./UpdateForm.scss";
+import { async } from 'q';
 
 export default class componentName extends Component {
     state = {
@@ -27,8 +28,25 @@ export default class componentName extends Component {
         });
     };
 
-    updateRow = event => {
+    updateRow =  async(event) => {
         event.preventDefault(); //Detener la funcion por defecto
+        console.log(this.state)
+        const response = await fetch(
+            "https://happy-test2.herokuapp.com/api/applicants",
+            {
+              method: "POST",
+              body: JSON.stringify(this.state),
+              headers: {
+                Authorization:
+                  "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+              },
+              mode: "cors"
+            }
+          );
+
+          console.log("response", response)
+          let data = await response.json();
+        
     };
 
     render() {

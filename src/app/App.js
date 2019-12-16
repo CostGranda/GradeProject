@@ -5,6 +5,8 @@ import Footer from "./components/Footer";
 import "./CSS/styles.css";
 import Routes from "./components/Routes/Routes";
 import ApplicantForm from "./pages/UpdateForm";
+import localServices from './services/LocalStorageService';
+
 
 export default class App extends Component {
   state = {
@@ -14,6 +16,14 @@ export default class App extends Component {
   handleChangeState = authed => {
     this.setState({ authed: authed });
   };
+
+  componentDidMount() {
+    const isAuted = localServices.getCurrentAccountId('user');
+    if(isAuted.usuario){
+      this.setState({ authed: true });
+    }
+    
+  }
 
   render() {
     return (

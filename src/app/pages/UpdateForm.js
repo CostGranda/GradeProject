@@ -49,23 +49,9 @@ export default class componentName extends Component {
 
   updateRow = async e => {
     e.preventDefault(); //Detener la funcion por defecto
-    // const {
-    //   cedula,
-    //   telefonos,
-    //   nombres,
-    //   apellidos,
-    //   especialidades,
-    //   email,
-    //   origen,
-    //   state,
-    //   calificacion,
-    //   comentarios,
-    //   disponibilidad2,
-    //   ciudad
-    // } = this.state;
         try {
       const response = await fetch(
-        "https://happy-test2.herokuapp.com/api/alerts",
+        "https://happy-test2.herokuapp.com/api/applicants",
         {
           method: "PUT",
           body:JSON.stringify(this.state),

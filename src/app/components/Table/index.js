@@ -5,7 +5,7 @@ import fuzzyTextFilterFn from "./components/Fuzzy";
 import DefaultColumnFilter from "./components/DefaultColumnFilter";
 import "./table.scss";
 
-function Table({ columns, data, createRoute, updateRoute }) {
+function Table({ columns, data, createRoute, updateRoute, setReload }) {
   const filterTypes = React.useMemo(
     () => ({
       fuzzyText: fuzzyTextFilterFn,
@@ -49,7 +49,12 @@ function Table({ columns, data, createRoute, updateRoute }) {
         },
         mode: "cors"
       });
+      console.log("response", response);
+
       let data = await response.json();
+      if(response.status === 200) {
+        setReload(true);
+      }
       console.log(data);
     };
     fetchDelete();

@@ -5,6 +5,8 @@ import "./Empty.scss";
 
 function ApplicantTablePage() {
     const [data, setData] = useState();
+    const [needReload, setReload] = useState(false);
+
 
     const columnsTable = useMemo(
         () => [
@@ -41,34 +43,44 @@ function ApplicantTablePage() {
         []
     );
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(
-                "https://happy-test2.herokuapp.com/api/alerts",
-                {
-                    method: "GET",
-                    headers: {
-                        Authorization:
-                            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
-                    },
-                    mode: "cors"
-                }
-            );
-            let data = await response.json();
-            const newData = data.map(item => ({
-                ...item,
-                availability: item.availability
-                    ? new Date(item.availability).toDateString()
-                    : undefined,
-                Date: item.Date
-                    ? new Date(item.Date).toDateString()
-                    : undefined
-            }));
-            setData(newData);
-        };
+    const fetchData = async () => {
+        const response = await fetch(
+            "https://happy-test2.herokuapp.com/api/alerts",
+            {
+                method: "GET",
+                headers: {
+                    Authorization:
+                        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+                },
+                mode: "cors"
+            }
+        );
+        let data = await response.json();
+        const newData = data.map(item => ({
+            ...item,
+            availability: item.availability
+                ? new Date(item.availability).toDateString()
+                : undefined,
+            Date: item.Date
+                ? new Date(item.Date).toDateString()
+                : undefined
+        }));
 
+        setReload(false)
+        setData(newData);
+    };
+
+
+    useEffect(() => {
         fetchData();
-    }, []);
+      }, []);
+    
+      useEffect(()=>{
+        if(needReload) {
+          fetchData();
+        }
+      }, [needReload])
+
 
     return (
         <>
@@ -80,6 +92,7 @@ function ApplicantTablePage() {
                         data={data}
                         createRoute="/createAlarm"
                         updateRoute="/UpdateAlarm"
+                        setReload={setReload}
                     />
                 </div>
             )}{" "}
