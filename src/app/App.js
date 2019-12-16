@@ -5,8 +5,7 @@ import Footer from "./components/Footer";
 import "./CSS/styles.css";
 import Routes from "./components/Routes/Routes";
 import ApplicantForm from "./pages/UpdateForm";
-import localServices from './services/LocalStorageService';
-
+import localServices from "./services/LocalStorageService";
 
 export default class App extends Component {
   state = {
@@ -18,11 +17,10 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const isAuted = localServices.getCurrentAccountId('user');
-    if(isAuted.usuario){
-      this.setState({ authed: true });
-    }
-    
+    const isAuted = localServices.getCurrentAccountId("user");
+    // if(isAuted.usuario){
+    //   this.setState({ authed: true });
+    // }
   }
 
   render() {
@@ -33,8 +31,8 @@ export default class App extends Component {
           <Routes
             authed={this.state.authed}
             handleChangeState={this.handleChangeState}
-            />
-            {/* <ApplicantForm /> */}          
+          />
+          {/* <ApplicantForm /> */}
           <Footer />
         </Router>
       </Fragment>
