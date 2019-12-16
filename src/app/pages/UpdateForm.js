@@ -1,34 +1,85 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
+import axios from "axios";
+import { BASE_ENDPOINT } from "../../constanst";
 
 export default class componentName extends Component {
   state = {
-    identification: "",
-    names: "",
-    surNames: "",
-    city: "",
+    cedula: "",
+    nombres: "",
+    apellidos: "",
+    ciudad: "",
     email: "",
-    number: "",
-    specialites: "",
-    date: "",
-    comments: "",
+    telefonos: "",
+    especialidades: "",
+    disponibilidad2: "2019-05-12",
+    comentarios: "",
     state: "",
-    calification: "",
-    origin: ""
+    calificacion: "",
+    origen: ""
   };
 
   handleInput = (e, keyText) => {
     const value = e.target.value;
     this.setState({
-      [keyText]: value,
-      errorStatus: false,
-      sucefullStatus: false,
-      message: ""
+      [keyText]: value
     });
   };
 
-  updateRow = event => {
-    event.preventDefault(); //Detener la funcion por defecto
+  componentDidMount() {
+    let locationActual = window.location.pathname;
+    const path = locationActual.split("/");
+    const id = path[2];
+    this.getAplicant(id);
+  }
+
+  getAplicant = async id => {
+    const URL = `https://happy-test2.herokuapp.com/api/applicants/cedula/${id}`;
+    const response = await fetch(`${URL}`, {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+      },
+      mode: "cors"
+    });
+    let data = await response.json();
+    this.setState(data[0]);
+  };
+
+  updateRow = async e => {
+    e.preventDefault(); //Detener la funcion por defecto
+    // const {
+    //   cedula,
+    //   telefonos,
+    //   nombres,
+    //   apellidos,
+    //   especialidades,
+    //   email,
+    //   origen,
+    //   state,
+    //   calificacion,
+    //   comentarios,
+    //   disponibilidad2,
+    //   ciudad
+    // } = this.state;
+        try {
+      const response = await fetch(
+        "https://happy-test2.herokuapp.com/api/alerts",
+        {
+          method: "PUT",
+          body:JSON.stringify(this.state)
+          headers: {
+            Authorization:
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+          },
+          mode: "cors"
+        }
+      );
+      console.log(response);
+    } catch {
+      console.log("err");
+    }
   };
 
   render() {
@@ -39,11 +90,10 @@ export default class componentName extends Component {
           <div className="form-row col-md-6">
             <label htmlFor="inputId4">Identification number</label>
             <input
-              value={this.state.identification}
+              value={this.state.cedula}
               type="number"
               className="form-control"
-              id="inputId4"
-              placeholder="Identification number"
+              disabled
               onChange={e => this.handleInput(e, "identification")}
             />
           </div>
@@ -51,35 +101,30 @@ export default class componentName extends Component {
             <div className="form-group col-md-6">
               <label htmlFor="inputName4">Names</label>
               <input
-                value={this.state.names}
+                value={this.state.nombres}
                 type="text"
                 className="form-control"
-                id="inputName4"
-                placeholder="Names"
-                onChange={e => this.handleInput(e, "names")}
+                onChange={e => this.handleInput(e, "nombres")}
               />
             </div>
             <div className="form-group col-md-6">
               <label htmlFor="inputSurname4">Surnames</label>
               <input
-                value={this.state.surNames}
+                value={this.state.apellidos}
                 type="text"
                 className="form-control"
-                id="inputSurname4"
-                placeholder="Surnames"
-                onChange={e => this.handleInput(e, "surNames")}
+                onChange={e => this.handleInput(e, "apellidos")}
               />
             </div>
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="city4">City</label>
             <input
-              value={this.state.city}
+              value={this.state.ciudad}
               type="text"
               className="form-control"
-              id="inputCity4"
               placeholder="City"
-              onChange={e => this.handleInput(e, "city")}
+              onChange={e => this.handleInput(e, "ciudad")}
             />
           </div>
           <div className="form-group col-md-6">
@@ -88,29 +133,24 @@ export default class componentName extends Component {
               value={this.state.email}
               type="email"
               className="form-control"
-              id="inputEmail4"
-              placeholder="Email"
               onChange={e => this.handleInput(e, "email")}
             />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputContactNumber">Contact number</label>
             <input
-              value={this.state.number}
+              value={this.state.telefonos}
               type="number"
               className="form-control"
-              id="inputContactNumber"
-              placeholder="Contact number"
-              onChange={e => this.handleInput(e, "number")}
+              onChange={e => this.handleInput(e, "telefonos")}
             />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputContactNumber">Specialties</label>
             <select
-              value={this.state.specialites}
+              value={this.state.especialidades}
               className="custom-select"
-              required
-              onChange={e => this.handleInput(e, "specialites")}
+              onChange={e => this.handleInput(e, "especialidades")}
             >
               <option value="">Choose options...</option>
               <option value="ABAP">ABAP</option>
@@ -121,29 +161,27 @@ export default class componentName extends Component {
           <div className="form-group col-md-6">
             <label htmlFor="inputDate4">Date</label>
             <input
-              value={this.state.date}
+              value={this.state.disponibilidad2}
               type="date"
               className="form-control"
-              id="inputDate4"
               placeholder="Date"
-              onChange={e => this.handleInput(e, "date")}
+              onChange={e => this.handleInput(e, "disponibilidad")}
             />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputcomments4">Comments</label>
             <input
-              value={this.state.comments}
+              value={this.state.comentarios}
               type="text"
               className="form-control"
-              id="inputComments4"
               placeholder="Comments"
-              onChange={e => this.handleInput(e, "comments")}
+              onChange={e => this.handleInput(e, "comentarios")}
             />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputCalification">Calification</label>
             <select
-              value={this.state.calification}
+              value={this.state.calificacion}
               className="custom-select"
               required
               onChange={e => this.handleInput(e, "calification")}
@@ -166,25 +204,23 @@ export default class componentName extends Component {
             <select
               value={this.state.state}
               className="custom-select"
-              required
               onChange={e => this.handleInput(e, "state")}
             >
               <option value="">Choose options...</option>
-              <option value="Hired">Hired</option>
-              <option value="In process">In process</option>
+              <option value="Contratado">Hired</option>
+              <option value="En proceso">In process</option>
             </select>
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputOrigin">Origin</label>
             <select
-              value={this.state.origin}
+              value={this.state.origen}
               className="custom-select"
-              required
-              onChange={e => this.handleInput(e, "origin")}
+              onChange={e => this.handleInput(e, "origen")}
             >
               <option value="">Choose options...</option>
               <option value="Manual">Manual</option>
-              <option value="Automatic">Automatic</option>
+              <option value="Auto">Automatic</option>
             </select>
           </div>
           <div className="form-group col-md-6">

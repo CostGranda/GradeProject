@@ -1,20 +1,43 @@
 import React, { Component } from "react";
 
 export default class componentName extends Component {
-  identificationRef = React.createRef();
-  descriptionRef = React.createRef();
-  dateRef = React.createRef();
-
-  updateRow = event => {
-    event.preventDefault(); //Detener la funcion por defecto
-    const identification = this.identificationRef.current.value,
-      description = this.descriptionRef.current.value,
-      date = this.dateRef.current.value;
+  state = {
+    identification: "",
+    description: "",
+    Date: ""
   };
 
-  //   componentDidMount() {
-  //     console.log("Component did moutn");
-  //   }
+  handleInput = (e, keyText) => {
+    const value = e.target.value;
+    this.setState({
+      [keyText]: value
+    });
+  };
+
+  updateRow = e => {
+    e.preventDefault(); //Detener la funcion por defecto
+  };
+
+  componentDidMount() {
+    let locationActual = window.location.pathname;
+    const path = locationActual.split("/");
+    const id = path[2];
+    // this.getAlarms(id);
+  }
+
+  // getAlarms = async id => {
+  //   const URL = `https://happy-test2.herokuapp.com/api/applicants/cedula/${id}`;
+  //   const response = await fetch(`${URL}`, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization:
+  //         "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+  //     },
+  //     mode: "cors"
+  //   });
+  //   let data = await response.json();
+  //   this.setState(data[0]);
+  // };
 
   render() {
     return (
@@ -23,29 +46,27 @@ export default class componentName extends Component {
           <div className="form-row col-md-6">
             <label htmlFor="inputId4">Identification number</label>
             <input
-              ref={this.identificationRef}
+              value={this.state.identification}
+              onChange={e => this.handleInput(e, "identification")}
               type="number"
               className="form-control"
-              id="inputId4"
-              placeholder="Identification number"
             />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputDate">Date</label>
             <input
-              ref={this.dateRef}
               type="date"
               className="form-control"
-              id="inputSurname4"
-              placeholder="Surnames"
+              value={this.state.Date}
+              onChange={e => this.handleInput(e, "Date")}
             />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="exampleFormControlTextarea2">Description</label>
             <textarea
-              ref={this.descriptionRef}
+              value={this.state.description}
+              onChange={e => this.handleInput(e, "description")}
               class="form-control rounded-0"
-              id="exampleFormControlTextarea2"
               rows="3"
             ></textarea>
           </div>
