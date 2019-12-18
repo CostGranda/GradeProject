@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./UpdateForm.scss";
 import axios from "axios";
 import { BASE_ENDPOINT } from "../../constanst";
+import Mensaje from "../components/Message";
 
 export default class componentName extends Component {
   state = {
@@ -12,7 +13,7 @@ export default class componentName extends Component {
     email: "",
     telefonos: "",
     especialidades: "",
-    disponibilidad2: "2019-05-12",
+    disponibilidad2: "20-12-2019",
     comentarios: "",
     state: "",
     calificacion: "",
@@ -22,7 +23,10 @@ export default class componentName extends Component {
   handleInput = (e, keyText) => {
     const value = e.target.value;
     this.setState({
-      [keyText]: value
+      [keyText]: value,
+      errorStatus: false,
+      sucefullStatus: false,
+      message: ""
     });
   };
 
@@ -49,22 +53,51 @@ export default class componentName extends Component {
 
   updateRow = async e => {
     e.preventDefault(); //Detener la funcion por defecto
-        try {
+    try {
       const response = await fetch(
         "https://happy-test2.herokuapp.com/api/applicants",
         {
           method: "PUT",
-          body:JSON.stringify(this.state),
+          body: JSON.stringify(this.state),
           headers: {
             Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8",
+            "content-type": "application/json"
           },
           mode: "cors"
         }
       );
-      console.log(response);
+      if (response.status === 200) {
+        this.setState({
+          sucefullStatus: true,
+          errorStatus: false,
+          message: "Se ah realizado el cambio con exito",
+          cedula: "",
+          nombres: "",
+          apellidos: "",
+          ciudad: "",
+          email: "",
+          telefonos: "",
+          especialidades: "",
+          disponibilidad: "",
+          comentarios: "",
+          state: "",
+          calificacion: "",
+          origen: ""
+        });
+      } else {
+        this.setState({
+          errorStatus: true,
+          sucefullStatus: false,
+          message: "No se puede realizar el cambio, intente de nuevo"
+        });
+      }
     } catch {
-      console.log("err");
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "No se puede realizar el cambio, intente de nuevo"
+      });
     }
   };
 
@@ -253,7 +286,7 @@ export default class componentName extends Component {
               value={this.state.calificacion}
               className="custom-select"
               required
-              onChange={e => this.handleInput(e, "calification")}
+              onChange={e => this.handleInput(e, "calificacion")}
             >
               <option value="">Choose options...</option>
               <option value="1">1</option>
@@ -310,6 +343,12 @@ export default class componentName extends Component {
             </div>
           </div>
           <div className=" col-md-6">
+            {this.state.errorStatus && (
+              <Mensaje message={this.state.message} property="error" />
+            )}
+            {this.state.sucefullStatus && (
+              <Mensaje message={this.state.message} property="succesfull" />
+            )}
             <button type="submit" className="btn btn-primary ">
               Submit
             </button>

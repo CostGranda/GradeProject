@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
+import Mensaje from "../components/Message";
 
 export default class componentName extends Component {
   state = {
     identification: "",
-    date: "",
+    Date: "",
     description: "",
     names: "",
     surnames: "",
@@ -14,7 +15,10 @@ export default class componentName extends Component {
   handleInput = (e, keyText) => {
     const value = e.target.value;
     this.setState({
-      [keyText]: value
+      [keyText]: value,
+      errorStatus: false,
+      sucefullStatus: false,
+      message: ""
     });
   };
 
@@ -33,9 +37,37 @@ export default class componentName extends Component {
         mode: "cors"
       }
     );
-    console.log("response", response);
-    let data = await response.json();
-    console.log(data);
+    if (response.status === 200) {
+      this.setState({
+        errorStatus: false,
+        sucefullStatus: true,
+        message: "Alerta registrada con exito",
+        identification: "",
+        date: "",
+        description: "",
+        names: "",
+        surnames: "",
+        applicant: ""
+      });
+    } else if (response.status === 409) {
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "El aspirante ya posee una alerta"
+      });
+    } else if (response.status === 406) {
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "La fecha no es valida, por favor verifique"
+      });
+    } else {
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "Error al realizar el registro, intente de nuevo"
+      });
+    }
   };
 
   render() {
@@ -58,11 +90,11 @@ export default class componentName extends Component {
             <div className="form-group col-md-6">
               <label htmlFor="inputName4">Date</label>
               <input
-                value={this.state.date}
+                value={this.state.Date}
                 type="date"
                 className="form-control"
                 id="inputName4"
-                onChange={e => this.handleInput(e, "date")}
+                onChange={e => this.handleInput(e, "Date")}
               />
             </div>
           </div>
@@ -79,6 +111,12 @@ export default class componentName extends Component {
             </div>
           </div>
           <div className=" col-md-6">
+            {this.state.errorStatus && (
+              <Mensaje message={this.state.message} property="error" />
+            )}
+            {this.state.sucefullStatus && (
+              <Mensaje message={this.state.message} property="succesfull" />
+            )}
             <button type="submit" className="btn btn-primary ">
               Submit
             </button>

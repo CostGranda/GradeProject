@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
+import Mensaje from "../components/Message";
 
 export default class componentName extends Component {
   state = {
@@ -29,7 +30,7 @@ export default class componentName extends Component {
 
   updateRow = async event => {
     event.preventDefault(); //Detener la funcion por defecto
-    console.log(this.state);
+
     const response = await fetch(
       "https://happy-test2.herokuapp.com/api/applicants",
       {
@@ -43,9 +44,50 @@ export default class componentName extends Component {
         mode: "cors"
       }
     );
-    console.log("response", response);
-    let data = await response.json();
-    console.log(data);
+    if (response.status === 201) {
+      this.setState({
+        sucefullStatus: true,
+        errorStatus: false,
+        message: "Usuario registrado con exito",
+        cedula: "",
+        nombres: "",
+        apellidos: "",
+        ciudad: "",
+        telefonos: "",
+        email: "",
+        telefonos: "",
+        especialidades: "",
+        disponibilidad: "",
+        comentarios: "",
+        state: "",
+        calificacion: "",
+        origen: ""
+      });
+    } else if (response.status === 200) {
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "Usuario ya esta registrado en nuestra DB"
+      });
+    } else if (response.status === 400) {
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "Usuario ya registrado en la base de datos"
+      });
+    } else if (response.status === 406) {
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "Por favor ingrese una fecha valida"
+      });
+    } else {
+      this.setState({
+        errorStatus: true,
+        sucefullStatus: false,
+        message: "Error al realizar el registro, intente de nuevo"
+      });
+    }
   };
 
   render() {
@@ -312,6 +354,12 @@ export default class componentName extends Component {
             </div>
           </div>
           <div className=" col-md-6">
+            {this.state.errorStatus && (
+              <Mensaje message={this.state.message} property="error" />
+            )}
+            {this.state.sucefullStatus && (
+              <Mensaje message={this.state.message} property="succesfull" />
+            )}
             <button type="submit" className="btn btn-primary ">
               Submit
             </button>
