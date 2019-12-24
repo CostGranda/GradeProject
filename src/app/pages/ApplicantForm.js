@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Mensaje from "../components/Message";
 import { BASE_ENDPOINT } from "../../constanst";
+import UploadFile from "../components/UploadFile";
 
 export default class componentName extends Component {
   state = {
@@ -13,7 +14,8 @@ export default class componentName extends Component {
     names: "",
     surNames: "",
     specialites: "",
-    email: ""
+    email: "",
+    cv: ""
   };
 
   handleInput = (e, keyText) => {
@@ -34,7 +36,8 @@ export default class componentName extends Component {
       names,
       surNames,
       specialites,
-      email
+      email,
+      cv
     } = this.state;
 
     try {
@@ -45,6 +48,7 @@ export default class componentName extends Component {
         especialidades: [specialites],
         email: email,
         telefonos: [number],
+        cv,
         origen: "Completado"
       });
       if (response.status === 201) {
@@ -57,7 +61,8 @@ export default class componentName extends Component {
           names: "",
           surNames: "",
           specialites: "",
-          email: ""
+          email: "",
+          cv:""
         });
       } else if (response.status === 200) {
         this.setState({
@@ -152,10 +157,11 @@ export default class componentName extends Component {
               <option value="ABAP3">ABAP chimba x2</option>
             </select>
           </div>
-          <div className="custom-file col-md-6">
+          {/* <div className="custom-file col-md-6">
             <input type="file" className="custom-file-input" />
             <label className="custom-file-label">curriculum vitae</label>
-          </div>
+          </div> */}
+          <UploadFile cedula={this.state.identification} setCv={ cv => this.setState({ cv })} />
           <div className="form-group col-md-6">
             <div className="form-check">
               <input className="form-check-input" type="checkbox" required />
