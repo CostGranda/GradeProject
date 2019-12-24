@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
 import Mensaje from "../components/Message";
+import localServices from "../services/LocalStorageService";
 
 export default class componentName extends Component {
   state = {
@@ -30,15 +31,14 @@ export default class componentName extends Component {
 
   updateRow = async event => {
     event.preventDefault(); //Detener la funcion por defecto
-
+    const token = localServices.getCurrentAccountId("token");
     const response = await fetch(
       "https://happy-test2.herokuapp.com/api/applicants",
       {
         method: "POST",
         body: JSON.stringify(this.state),
         headers: {
-          Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8",
+          Authorization: `Bearer ${token.token}`,
           "content-type": "application/json"
         },
         mode: "cors"
@@ -268,7 +268,7 @@ export default class componentName extends Component {
             </select>
           </div>
           <div className="form-group col-md-6">
-            <label htmlFor="inputDate4">Date</label>
+            <label htmlFor="inputDate4">Availability</label>
             <input
               value={this.state.disponibilidad}
               type="date"
@@ -319,8 +319,8 @@ export default class componentName extends Component {
               onChange={e => this.handleInput(e, "state")}
             >
               <option value="">Choose options...</option>
-              <option value="Hired">Hired</option>
-              <option value="In process">In process</option>
+              <option value="contratado">Hired</option>
+              <option value="En proceso">In process</option>
             </select>
           </div>
           <div className="form-group col-md-6">

@@ -3,6 +3,8 @@ import "./UpdateForm.scss";
 import axios from "axios";
 import { BASE_ENDPOINT } from "../../constanst";
 import Mensaje from "../components/Message";
+import localServices from "../services/LocalStorageService";
+import moment from "moment";
 
 export default class componentName extends Component {
   state = {
@@ -13,7 +15,7 @@ export default class componentName extends Component {
     email: "",
     telefonos: "",
     especialidades: "",
-    disponibilidad2: "20-12-2019",
+    disponibilidad: "",
     comentarios: "",
     state: "",
     calificacion: "",
@@ -38,21 +40,29 @@ export default class componentName extends Component {
   }
 
   getAplicant = async id => {
+    const token = localServices.getCurrentAccountId("token");
     const URL = `https://happy-test2.herokuapp.com/api/applicants/cedula/${id}`;
     const response = await fetch(`${URL}`, {
       method: "GET",
       headers: {
-        Authorization:
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+        Authorization: `Bearer ${token.token}`
       },
       mode: "cors"
     });
     let data = await response.json();
     this.setState(data[0]);
+    if (this.state.disponibilidad != null) {
+      const date = new Date(this.state.disponibilidad);
+      const disponibilidad = moment(date).format("YYYY-MM-DD");
+      this.setState({
+        disponibilidad: disponibilidad
+      });
+    }
   };
 
   updateRow = async e => {
     e.preventDefault(); //Detener la funcion por defecto
+    const token = localServices.getCurrentAccountId("token");
     try {
       const response = await fetch(
         "https://happy-test2.herokuapp.com/api/applicants",
@@ -60,8 +70,7 @@ export default class componentName extends Component {
           method: "PUT",
           body: JSON.stringify(this.state),
           headers: {
-            Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8",
+            Authorization: `Bearer ${token.token}`,
             "content-type": "application/json"
           },
           mode: "cors"
@@ -281,9 +290,9 @@ export default class componentName extends Component {
             </select>
           </div>
           <div className="form-group col-md-6">
-            <label htmlFor="inputDate4">Date</label>
+            <label htmlFor="inputDate4">Availability</label>
             <input
-              value={this.state.disponibilidad2}
+              value={this.state.disponibilidad}
               type="date"
               className="form-control"
               placeholder="Date"
@@ -329,7 +338,7 @@ export default class componentName extends Component {
               onChange={e => this.handleInput(e, "state")}
             >
               <option value="">Choose options...</option>
-              <option value="Contratado">Hired</option>
+              <option value="contratado">Hired</option>
               <option value="En proceso">In process</option>
             </select>
           </div>

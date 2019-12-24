@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import fuzzyTextFilterFn from "./components/Fuzzy";
 import DefaultColumnFilter from "./components/DefaultColumnFilter";
 import "./table.scss";
+import localServices from "../../services/LocalStorageService";
 
 function Table({ columns, data, createRoute, updateRoute, setReload }) {
   const filterTypes = React.useMemo(
@@ -32,7 +33,7 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
   );
 
   const deleteItem = item => {
-    console.log(item);
+    const token = localServices.getCurrentAccountId("token");
     const fetchDelete = async () => {
       const id = item.original.identification
         ? item.original.identification
@@ -44,18 +45,16 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
       const response = await fetch(`${URL}${id}`, {
         method: "DELETE",
         headers: {
-          Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+          Authorization: `Bearer ${token.token}`
         },
         mode: "cors"
       });
       console.log("response", response);
 
       let data = await response.json();
-      if(response.status === 200) {
+      if (response.status === 200) {
         setReload(true);
       }
-      console.log(data);
     };
     fetchDelete();
   };

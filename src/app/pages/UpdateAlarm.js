@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Mensaje from "../components/Message";
+import localServices from "../services/LocalStorageService";
+import moment from "moment";
 
 export default class componentName extends Component {
   state = {
@@ -30,28 +32,35 @@ export default class componentName extends Component {
   }
 
   getAlarms = async id => {
+    const token = localServices.getCurrentAccountId("token");
     const URL = `https://happy-test2.herokuapp.com/api/alerts/${id}`;
     const response = await fetch(`${URL}`, {
       method: "GET",
       headers: {
-        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+        Authorization: `Bearer ${token.token}`
       },
       mode: "cors"
     });
 
     let data = await response.json();
     this.setState(data);
+    if (this.state.Date != null) {
+      const date = new Date(this.state.Date);
+      const disponibilidad = moment(date).format("YYYY-MM-DD");
+      this.setState({ Date: disponibilidad });
+    }
   };
 
   updateAlert = async e => {
     e.preventDefault(); //Detener la funcion por defecto
+    const token = localServices.getCurrentAccountId("token");
     try {
       const response = await fetch(
         "https://happy-test2.herokuapp.com/api/alerts", {
           method: "PUT",
           body: JSON.stringify(this.state),
           headers: {
-            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8",
+            Authorization: `Bearer ${token.token}`,
             "content-type": "application/json"
           },
           mode: "cors"
@@ -102,49 +111,49 @@ export default class componentName extends Component {
       <
       div className = "form-row col-md-6" >
       <
-      label htmlFor = "inputId4" > Identification number < /label> <
+      label htmlFor = "inputId4" > Identification number < /label>{" "} <
       input value = { this.state.identification }
       onChange = { e => this.handleInput(e, "identification") }
       type = "number"
       disabled className = "form-control" /
       >
       <
-      /div> <
+      /div>{" "} <
       div className = "form-group col-md-6" >
       <
-      label htmlFor = "inputDate" > Date < /label> <
+      label htmlFor = "inputDate" > Date < /label>{" "} <
       input type = "date"
       className = "form-control"
       value = { this.state.Date }
       onChange = { e => this.handleInput(e, "Date") }
-      /> <
-      /div> <
+      />{" "} <
+      /div>{" "} <
       div className = "form-group col-md-6" >
       <
-      label htmlFor = "exampleFormControlTextarea2" > Description < /label> <
+      label htmlFor = "exampleFormControlTextarea2" > Description < /label>{" "} <
       textarea value = { this.state.description }
       onChange = { e => this.handleInput(e, "description") }
       class = "form-control rounded-0"
       rows = "3" >
-      < /textarea> <
-      /div> <
-      div className = "content-center" > {
+      < /textarea>{" "} <
+      /div>{" "} <
+      div className = "content-center" > { " " } {
         this.state.errorStatus && ( <
           Mensaje message = { this.state.message }
           property = "error" / >
         )
-      } {
+      } { " " } {
         this.state.sucefullStatus && ( <
           Mensaje message = { this.state.message }
           property = "succesfull" / >
         )
-      } <
+      } { " " } <
       button type = "submit"
       className = "btn btn-primary " >
-      Submit <
-      /button> <
-      /div> <
-      /form> <
+      Submit { " " } <
+      /button>{" "} <
+      /div>{" "} <
+      /form>{" "} <
       /div>
     );
   }

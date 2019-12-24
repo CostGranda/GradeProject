@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import SelectColumnFilter from "../components/Table/components/SelectColumnFilter";
 import SliderColumnFilter from "../components/Table/components/SliderColumnFilter";
 import Table from "../components/Table";
+import localServices from "../services/LocalStorageService";
 
 import "./Empty.scss";
 
@@ -59,11 +60,6 @@ function EmptyPage() {
         filter: "fuzzyText"
       },
       {
-        Header: "Skype",
-        accessor: "skype",
-        filter: "fuzzyText"
-      },
-      {
         Header: "Origin",
         accessor: "origen",
         Filter: SelectColumnFilter,
@@ -88,13 +84,13 @@ function EmptyPage() {
   );
 
   const fetchData = async () => {
+    const token = localServices.getCurrentAccountId("token");
     const response = await fetch(
       "https://happy-test2.herokuapp.com/api/applicants",
       {
         method: "GET",
         headers: {
-          Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBZG1pbiIsImlhdCI6MTU3NjA2NTAwOSwiZXhwIjoxNTc3Mjc0NjA5fQ.HI24Ypq1mvX4-sV3T0o5_1ybgcAypcCIvopAkHXQvO8"
+          Authorization: `Bearer ${token.token}`
         },
         mode: "cors"
       }
@@ -106,23 +102,23 @@ function EmptyPage() {
         ? new Date(item.disponibilidad).toDateString()
         : undefined
     }));
-    setReload(false)
+    setReload(false);
     setData(newData);
   };
-
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  useEffect(()=>{
-    if(needReload) {
+  useEffect(() => {
+    if (needReload) {
       fetchData();
     }
-  }, [needReload])
+  }, [needReload]);
 
   return (
     <>
+      {" "}
       {data && (
         <div className="table-container">
           <Table
@@ -133,7 +129,7 @@ function EmptyPage() {
             updateRoute="/UpdateAplicant"
           />
         </div>
-      )}
+      )}{" "}
     </>
   );
 }
