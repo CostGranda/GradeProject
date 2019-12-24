@@ -85,6 +85,26 @@ export default class componentName extends Component {
           calificacion: "",
           origen: ""
         });
+      } else if (response.status === 400) {
+        this.setState({
+          errorStatus: true,
+          sucefullStatus: false,
+          message: "No existe el aspirante en la DB"
+        });
+      } else if (response.status === 406) {
+        this.setState({
+          errorStatus: true,
+          sucefullStatus: false,
+          message:
+            "La fecha de disponibilidad debe de llevar un valor, debido a que tiene asociada una alerta"
+        });
+      } else if (response.status === 409) {
+        this.setState({
+          errorStatus: true,
+          sucefullStatus: false,
+          message:
+            "La fecha de disponibilidad ingresada debe ser mayor a la actual"
+        });
       } else {
         this.setState({
           errorStatus: true,

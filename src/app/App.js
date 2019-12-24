@@ -17,10 +17,11 @@ export default class App extends Component {
   };
 
   componentDidMount() {
+    localServices.setCurrentAccountId("", "user");
     const isAuted = localServices.getCurrentAccountId("user");
-    // if(isAuted.usuario){
-    //   this.setState({ authed: true });
-    // }
+    if (isAuted.usuario) {
+      this.setState({ authed: true });
+    }
   }
 
   render() {
