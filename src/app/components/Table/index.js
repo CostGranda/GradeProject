@@ -102,7 +102,11 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
                 {row.cells.map(cell => {
                   return (
                     <td scope="row" {...cell.getCellProps()}>
-                      {cell.render("Cell")}
+                      {cell.column.id === 'cv' ? (
+                        <a href={cell.value} target ='_blank' rel="noopener noreferrer">
+                          Hoja de vida
+                        </a>
+                      ) : cell.render("Cell") } 
                     </td>
                   );
                 })}
