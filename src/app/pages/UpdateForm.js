@@ -365,12 +365,6 @@ export default class componentName extends Component {
             cedula={this.state.cedula}
             setCv={cv => this.setState({ cv })}
           />{" "}
-              <label
-                className="custom-file-label"
-                htmlFor="validatedCustomFile"
-              >
-                Choose file...
-              </label>
             </div>
           </div>
           <div className=" col-md-6">
