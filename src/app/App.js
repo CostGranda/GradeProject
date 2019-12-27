@@ -24,7 +24,7 @@ export default class App extends Component {
 
   componentDidMount() {
     const isAuted = localServices.getCurrentAccountId("user");
-    if (isAuted.usuario) {
+    if (isAuted && isAuted.usuario) {
       this.setState({ authed: true });
     }
   }
