@@ -5,6 +5,7 @@ import { BASE_ENDPOINT } from "../../constanst";
 import Mensaje from "../components/Message";
 import localServices from "../services/LocalStorageService";
 import moment from "moment";
+import UploadFile from "../components/UploadFile";
 
 export default class componentName extends Component {
   state = {
@@ -19,7 +20,8 @@ export default class componentName extends Component {
     comentarios: "",
     state: "",
     calificacion: "",
-    origen: ""
+    origen: "",
+    cv:""
   };
 
   handleInput = (e, keyText) => {
@@ -92,7 +94,8 @@ export default class componentName extends Component {
           comentarios: "",
           state: "",
           calificacion: "",
-          origen: ""
+          origen: "",
+          cv:''
         });
       } else if (response.status === 400) {
         this.setState({
@@ -358,11 +361,10 @@ export default class componentName extends Component {
             <label htmlFor="inputFile">Choose file</label>
             <br></br>
             <div className="custom-file col-md-6">
-              <input
-                type="file"
-                className="custom-file-input"
-                id="validatedCustomFile"
-              />
+            <UploadFile
+            cedula={this.state.cedula}
+            setCv={cv => this.setState({ cv })}
+          />{" "}
               <label
                 className="custom-file-label"
                 htmlFor="validatedCustomFile"
