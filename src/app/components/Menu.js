@@ -1,6 +1,9 @@
 import React from "react";
 import {NavLink } from 'react-router-dom'
-export default function Menu() {
+
+import localServices from "../services/LocalStorageService";
+
+export default function Menu({logOut}) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -67,9 +70,9 @@ export default function Menu() {
                 <a className="dropdown-item" href="#">
                   Settings
                 </a>
-                <a className="dropdown-item" href="#">
+                <div className="dropdown-item" onClick={logOut}>
                   Sign out
-                </a>
+                </div>
               </div>
             </li>
           </ul>

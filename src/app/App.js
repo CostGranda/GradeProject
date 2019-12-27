@@ -16,6 +16,12 @@ export default class App extends Component {
     this.setState({ authed: authed });
   };
 
+  logOut = () => {
+    localServices.removeCurrentAccountId("token")
+    localServices.removeCurrentAccountId("user")
+    this.setState({ authed: false })
+  }
+
   componentDidMount() {
     localServices.setCurrentAccountId("", "user");
     const isAuted = localServices.getCurrentAccountId("user");
@@ -28,7 +34,7 @@ export default class App extends Component {
     return (
       <Fragment>
         <Router>
-          <Menu />
+          <Menu logOut={()=>  this.logOut()}/>
           <Routes
             authed={this.state.authed}
             handleChangeState={this.handleChangeState}
