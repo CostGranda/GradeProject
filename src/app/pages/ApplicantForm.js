@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Mensaje from "../components/Message";
-import { BASE_ENDPOINT } from "../../constanst";
 import UploadFile from "../components/UploadFile";
 
 export default class componentName extends Component {

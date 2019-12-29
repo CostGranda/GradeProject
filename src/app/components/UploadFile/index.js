@@ -4,7 +4,6 @@ import localServices from "../../services/LocalStorageService";
 function UploadFile({ cedula, setCv }) {
   const handleFile = async e => {
     const file = e.target.files[0];
-    const token = localServices.getCurrentAccountId("token");
     let formData = new FormData();
     formData.append("file", file);
     const response = await fetch(
@@ -12,9 +11,6 @@ function UploadFile({ cedula, setCv }) {
       {
         method: "PUT",
         body: formData,
-        headers: {
-          Authorization: `Bearer ${token.token}`
-        },
         mode: "cors"
       }
     );
