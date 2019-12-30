@@ -3,6 +3,7 @@ import axios from "axios";
 import Mensaje from "../components/Message";
 import { BASE_ENDPOINT } from "../../constanst";
 import localServices from "../services/LocalStorageService";
+
 export default class Login extends Component {
   state = {
     user: "",
@@ -35,8 +36,10 @@ export default class Login extends Component {
           errorStatus: false
         });
         const token = response.data.token;
+        const role = response.data.role;
         localServices.setCurrentAccountId({ usuario }, "user");
         localServices.setCurrentAccountId({ token }, "token");
+        localServices.setCurrentAccountId({ role }, "role");
         this.handleChangeState(true);
       }
     } catch (error) {
