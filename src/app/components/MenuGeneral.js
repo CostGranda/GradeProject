@@ -1,8 +1,6 @@
 import React from "react";
 import {NavLink } from 'react-router-dom'
 
-import localServices from "../services/LocalStorageService";
-
 export default function Menu({logOut}) {
   return (
     <div>
@@ -31,11 +29,6 @@ export default function Menu({logOut}) {
             <li className="nav-item active">
               <NavLink className="nav-link" to="/Empty">
                 Data Base <span className="sr-only">(current)</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/ApplicantTable">
-                Alarms
               </NavLink>
             </li>
             <li className="nav-item dropdown">
