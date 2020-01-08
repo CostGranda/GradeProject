@@ -62,7 +62,7 @@ export default class componentName extends Component {
         sucefullStatus: false,
         message: "La fecha no es valida, por favor verifique"
       });
-       else if (response.status === 204) {
+    } else if (response.status === 204) {
       this.setState({
         errorStatus: true,
         sucefullStatus: false,
