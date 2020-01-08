@@ -37,6 +37,13 @@ export default class App extends Component {
     if (isAuted && isAuted.usuario) {
       this.setState({ authed: true });
     }
+    const role = localServices.getCurrentAccountId("role");
+    if (role.role === "Admin") {
+      this.setState({ role: true });
+    } else {
+      this.setState({ role: false });
+    }
+    console.log(role);
   }
 
   render() {
