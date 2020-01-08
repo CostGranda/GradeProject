@@ -1,5 +1,4 @@
 import React from "react";
-import localServices from "../../services/LocalStorageService";
 
 function UploadFile({ cedula, setCv }) {
   const handleFile = async e => {

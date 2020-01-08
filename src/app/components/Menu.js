@@ -1,9 +1,7 @@
 import React from "react";
-import {NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
-import localServices from "../services/LocalStorageService";
-
-export default function Menu({logOut}) {
+export default function Menu({ logOut }) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

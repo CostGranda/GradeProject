@@ -76,6 +76,8 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
     useFilters // useFilters!
   );
 
+  const role = localServices.getCurrentAccountId("role");
+
   return (
     <>
       <table className="table table-striped" {...getTableProps()}>
@@ -89,8 +91,8 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
                   <div>{column.canFilter ? column.render("Filter") : null}</div>
                 </th>
               ))}
-              <th>Edit</th>
-              <th>Delete</th>
+              {role.role === "Admin" && <th>Edit</th>}
+              {role.role === "Admin" && <th>Delete</th>}
             </tr>
           ))}
         </thead>
@@ -102,19 +104,58 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
                 {row.cells.map(cell => {
                   return (
                     <td scope="row" {...cell.getCellProps()}>
-                      {cell.column.id === 'cv' ? (
-                        <a href={cell.value} target ='_blank' rel="noopener noreferrer">
+                      {cell.column.id === "cv" ? (
+                        <a
+                          href={cell.value}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           Hoja de vida
                         </a>
-                      ) : cell.render("Cell") } 
+                      ) : (
+                        cell.render("Cell")
+                      )}
                     </td>
                   );
                 })}
-                <td>
-                  <NavLink to={`${updateRoute}/${row.cells[0].value}`}>
-                    <button type="button" class="btn btn-warning">
+
+                {role.role === "Admin" && (
+                  <td>
+                    <NavLink to={`${updateRoute}/${row.cells[0].value}`}>
+                      <button type="button" class="btn btn-warning">
+                        <svg
+                          class="bi bi-pencil"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M13.293 3.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM14 4l2 2-9 9-3 1 1-3 9-9z"
+                            clip-rule="evenodd"
+                          ></path>
+                          <path
+                            fill-rule="evenodd"
+                            d="M14.146 8.354l-2.5-2.5.708-.708 2.5 2.5-.708.708zM5 12v.5a.5.5 0 00.5.5H6v.5a.5.5 0 00.5.5H7v.5a.5.5 0 00.5.5H8v-1.5a.5.5 0 00-.5-.5H7v-.5a.5.5 0 00-.5-.5H5z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </button>
+                    </NavLink>
+                  </td>
+                )}
+
+                {role.role === "Admin" && (
+                  <td>
+                    <button
+                      onClick={() => deleteItem(row)}
+                      type="button"
+                      class="btn-danger"
+                    >
                       <svg
-                        class="bi bi-pencil"
+                        class="bi bi-x-circle-fill"
                         width="1em"
                         height="1em"
                         viewBox="0 0 20 20"
@@ -123,49 +164,24 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
                       >
                         <path
                           fill-rule="evenodd"
-                          d="M13.293 3.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM14 4l2 2-9 9-3 1 1-3 9-9z"
-                          clip-rule="evenodd"
-                        ></path>
-                        <path
-                          fill-rule="evenodd"
-                          d="M14.146 8.354l-2.5-2.5.708-.708 2.5 2.5-.708.708zM5 12v.5a.5.5 0 00.5.5H6v.5a.5.5 0 00.5.5H7v.5a.5.5 0 00.5.5H8v-1.5a.5.5 0 00-.5-.5H7v-.5a.5.5 0 00-.5-.5H5z"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM7.354 6.646L10 9.293l2.646-2.647a.5.5 0 01.708.708L10.707 10l2.647 2.646a.5.5 0 01-.708.708L10 10.707l-2.646 2.647a.5.5 0 01-.708-.708L9.293 10 6.646 7.354a.5.5 0 11.708-.708z"
                           clip-rule="evenodd"
                         ></path>
                       </svg>
                     </button>
-                  </NavLink>
-                </td>
-                <td>
-                  <button
-                    onClick={() => deleteItem(row)}
-                    type="button"
-                    class="btn-danger"
-                  >
-                    <svg
-                      class="bi bi-x-circle-fill"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM7.354 6.646L10 9.293l2.646-2.647a.5.5 0 01.708.708L10.707 10l2.647 2.646a.5.5 0 01-.708.708L10 10.707l-2.646 2.647a.5.5 0 01-.708-.708L9.293 10 6.646 7.354a.5.5 0 11.708-.708z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
-                </td>
+                  </td>
+                )}
               </tr>
             );
           })}
         </tbody>
       </table>
       <div className="container">
-        <NavLink className="create-button" to={createRoute}>
-          +
-        </NavLink>
+        {role.role === "Admin" && (
+          <NavLink className="create-button" to={createRoute}>
+            +
+          </NavLink>
+        )}
       </div>
     </>
   );

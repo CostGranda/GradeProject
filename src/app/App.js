@@ -14,21 +14,23 @@ export default class App extends Component {
     role: false
   };
 
-  handleChangeState = authed => {  
-    const role = localServices.getCurrentAccountId("role")
-    if (role.role==="Admin"){
+  handleChangeState = authed => {
+    const role = localServices.getCurrentAccountId("role");
+    if (role.role === "Admin") {
       this.setState({ role: true });
-    } else {this.setState({ role: false })}
+    } else {
+      this.setState({ role: false });
+    }
     this.setState({ authed: authed });
   };
 
   logOut = () => {
-    localServices.removeCurrentAccountId("token")
-    localServices.removeCurrentAccountId("role")
-    localServices.removeCurrentAccountId("user")
-    this.setState({ authed: false })
-    this.setState({ role: false })
-  }
+    localServices.removeCurrentAccountId("token");
+    localServices.removeCurrentAccountId("role");
+    localServices.removeCurrentAccountId("user");
+    this.setState({ authed: false });
+    this.setState({ role: false });
+  };
 
   componentDidMount() {
     const isAuted = localServices.getCurrentAccountId("user");
@@ -41,8 +43,23 @@ export default class App extends Component {
     return (
       <Fragment>
         <Router>
-          {this.state.role ? <Menu logOut={() => { this.logOut() }} /> : (this.state.authed ? <MenuGeneral logOut={() => { this.logOut() }} />  : <MenuLogin />)}
+          {this.state.role ? (
+            <Menu
+              logOut={() => {
+                this.logOut();
+              }}
+            />
+          ) : this.state.authed ? (
+            <MenuGeneral
+              logOut={() => {
+                this.logOut();
+              }}
+            />
+          ) : (
+            <MenuLogin />
+          )}
           <Routes
+            role={this.state.role}
             authed={this.state.authed}
             handleChangeState={this.handleChangeState}
           />

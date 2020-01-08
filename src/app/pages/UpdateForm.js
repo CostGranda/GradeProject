@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
-import axios from "axios";
-import { BASE_ENDPOINT } from "../../constanst";
 import Mensaje from "../components/Message";
 import localServices from "../services/LocalStorageService";
 import moment from "moment";
@@ -21,7 +19,7 @@ export default class componentName extends Component {
     state: "",
     calificacion: "",
     origen: "",
-    cv:""
+    cv: ""
   };
 
   handleInput = (e, keyText) => {
@@ -95,7 +93,7 @@ export default class componentName extends Component {
           state: "",
           calificacion: "",
           origen: "",
-          cv:''
+          cv: ""
         });
       } else if (response.status === 400) {
         this.setState({
@@ -361,10 +359,10 @@ export default class componentName extends Component {
             <label htmlFor="inputFile">Choose file</label>
             <br></br>
             <div className="custom-file col-md-6">
-            <UploadFile
-            cedula={this.state.cedula}
-            setCv={cv => this.setState({ cv })}
-          />{" "}
+              <UploadFile
+                cedula={this.state.cedula}
+                setCv={cv => this.setState({ cv })}
+              />{" "}
             </div>
           </div>
           <div className=" col-md-6">

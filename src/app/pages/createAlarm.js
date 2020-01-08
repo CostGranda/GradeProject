@@ -74,11 +74,11 @@ export default class componentName extends Component {
   render() {
     return (
       <div className="update">
-        <h3 className="update-title">Create Alarm</h3>
+        <h3 className="update-title"> Create Alarm </h3>{" "}
         <form className="update-form" onSubmit={this.updateRow}>
           <div className="form-row col-md-6">
             <div className="form-group col-md-6">
-              <label htmlFor="inputId4">Identification number</label>
+              <label htmlFor="inputId4"> Identification number </label>{" "}
               <input
                 value={this.state.identification}
                 type="number"
@@ -86,43 +86,44 @@ export default class componentName extends Component {
                 id="inputId4"
                 placeholder="Identification number"
                 onChange={e => this.handleInput(e, "identification")}
-              />
-            </div>
+              />{" "}
+            </div>{" "}
             <div className="form-group col-md-6">
-              <label htmlFor="inputName4">Date</label>
+              <label htmlFor="inputName4"> Date </label>{" "}
               <input
                 value={this.state.Date}
                 type="date"
                 className="form-control"
                 id="inputName4"
                 onChange={e => this.handleInput(e, "Date")}
-              />
-            </div>
-          </div>
+              />{" "}
+            </div>{" "}
+          </div>{" "}
           <div className="form-row col-md-6">
             <div className="form-group col-md-12">
-              <label htmlFor="inputSurname4">Description</label>
+              <label htmlFor="inputSurname4"> Description </label>{" "}
               <textarea
                 value={this.state.description}
                 class="form-control rounded-0"
                 id="exampleFormControlTextarea2"
                 rows="3"
                 onChange={e => this.handleInput(e, "description")}
-              ></textarea>
-            </div>
-          </div>
+              ></textarea>{" "}
+            </div>{" "}
+          </div>{" "}
           <div className=" col-md-6">
+            {" "}
             {this.state.errorStatus && (
               <Mensaje message={this.state.message} property="error" />
-            )}
+            )}{" "}
             {this.state.sucefullStatus && (
               <Mensaje message={this.state.message} property="succesfull" />
-            )}
+            )}{" "}
             <button type="submit" className="btn btn-primary ">
-              Submit
-            </button>
-          </div>
-        </form>
+              Submit{" "}
+            </button>{" "}
+          </div>{" "}
+        </form>{" "}
       </div>
     );
   }
