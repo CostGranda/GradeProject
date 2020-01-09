@@ -5,6 +5,8 @@ import fuzzyTextFilterFn from "./components/Fuzzy";
 import DefaultColumnFilter from "./components/DefaultColumnFilter";
 import "./table.scss";
 import localServices from "../../services/LocalStorageService";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Table({ columns, data, createRoute, updateRoute, setReload }) {
   const filterTypes = React.useMemo(
@@ -24,6 +26,34 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
     }),
     []
   );
+
+  const modalShow = row => {
+    confirmAlert({
+      title: "Confirm to delete",
+      message: "Are you sure to do this?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => deleteItem(row)
+        },
+        {
+          label: "No"
+        }
+      ]
+    });
+  };
+
+  const modalInfo = () => {
+    confirmAlert({
+      title: "No se puede borrar",
+      message: "El registro tiene una alarma asociada, no puede borrarse",
+      buttons: [
+        {
+          label: "Closed"
+        }
+      ]
+    });
+  };
 
   const defaultColumn = React.useMemo(
     () => ({
@@ -49,11 +79,12 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
         },
         mode: "cors"
       });
-      console.log("response", response);
 
       let data = await response.json();
       if (response.status === 200) {
         setReload(true);
+      } else if (response.status === 202) {
+        modalInfo();
       }
     };
     fetchDelete();
@@ -150,7 +181,7 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
                 {role.role === "Admin" && (
                   <td>
                     <button
-                      onClick={() => deleteItem(row)}
+                      onClick={() => modalShow(row)}
                       type="button"
                       class="btn-danger"
                     >
