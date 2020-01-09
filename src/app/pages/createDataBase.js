@@ -332,7 +332,7 @@ export default class componentName extends Component {
             </select>{" "}
           </div>{" "}
           <div className="form-group col-md-6">
-            <label htmlFor="inputFile"> Choose file </label> <br> </br>{" "}
+            <label htmlFor="inputFile"> Choose file </label>{" "}
             <div className="custom-file col-md-6">
               <UploadFile
                 cedula={this.state.cedula}

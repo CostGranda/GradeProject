@@ -43,10 +43,10 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
     });
   };
 
-  const modalInfo = () => {
+  const modalInfo = (title, message) => {
     confirmAlert({
-      title: "No se puede borrar",
-      message: "El registro tiene una alarma asociada, no puede borrarse",
+      title: title,
+      message: message,
       buttons: [
         {
           label: "Closed"
@@ -82,9 +82,20 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
 
       let data = await response.json();
       if (response.status === 200) {
+        const title = "Eliminado";
+        const message = "Se elemino con exito";
+        modalInfo(title, message);
         setReload(true);
       } else if (response.status === 202) {
-        modalInfo();
+        modalInfo(
+          "Error eliminando",
+          "El registro tiene una alarma asociada, no puede borrarse"
+        );
+      } else {
+        modalInfo(
+          "Error eliminando",
+          "No se pudo realizar la eliminación, intente nuevamente"
+        );
       }
     };
     fetchDelete();
