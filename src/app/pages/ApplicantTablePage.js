@@ -59,9 +59,9 @@ function ApplicantTablePage() {
     const newData = data.map(item => ({
       ...item,
       availability: item.availability
-        ? new Date(item.availability).toDateString()
+        ? item.availability.split("T", 1)
         : undefined,
-      Date: item.Date ? new Date(item.Date).toDateString() : undefined
+      Date: item.Date ? item.Date.split("T", 1) : undefined
     }));
 
     setReload(false);

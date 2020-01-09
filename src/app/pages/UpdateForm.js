@@ -52,10 +52,10 @@ export default class componentName extends Component {
     let data = await response.json();
     this.setState(data[0]);
     if (this.state.disponibilidad != null) {
-      const date = new Date(this.state.disponibilidad);
-      const disponibilidad = moment(date).format("YYYY-MM-DD");
+      let date = this.state.disponibilidad.split("T");
+      date = date[0];
       this.setState({
-        disponibilidad: disponibilidad
+        disponibilidad: date
       });
     }
   };

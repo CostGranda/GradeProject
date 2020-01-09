@@ -79,7 +79,6 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
         },
         mode: "cors"
       });
-
       let data = await response.json();
       if (response.status === 200) {
         const title = "Eliminado";

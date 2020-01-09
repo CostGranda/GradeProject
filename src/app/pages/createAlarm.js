@@ -50,7 +50,7 @@ export default class componentName extends Component {
         surnames: "",
         applicant: ""
       });
-    } else if (response.status === 409) {
+    } else if (response.status === 304) {
       this.setState({
         errorStatus: true,
         sucefullStatus: false,

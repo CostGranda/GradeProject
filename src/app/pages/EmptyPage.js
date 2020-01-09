@@ -3,6 +3,7 @@ import SelectColumnFilter from "../components/Table/components/SelectColumnFilte
 import SliderColumnFilter from "../components/Table/components/SliderColumnFilter";
 import Table from "../components/Table";
 import localServices from "../services/LocalStorageService";
+import moment from "moment";
 
 import "./Empty.scss";
 
@@ -99,7 +100,7 @@ function EmptyPage() {
     const newData = data.map(item => ({
       ...item,
       disponibilidad: item.disponibilidad
-        ? new Date(item.disponibilidad).toDateString()
+        ? item.disponibilidad.split("T", 1)
         : undefined
     }));
     setReload(false);

@@ -45,9 +45,11 @@ export default class componentName extends Component {
     let data = await response.json();
     this.setState(data);
     if (this.state.Date != null) {
-      const date = new Date(this.state.Date);
-      const disponibilidad = moment(date).format("YYYY-MM-DD");
-      this.setState({ Date: disponibilidad });
+      let date = this.state.Date.split("T");
+      date = date[0];
+      this.setState({
+        Date: date
+      });
     }
   };
 
