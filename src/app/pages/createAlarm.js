@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
-import Mensaje from "../components/Message";
 import localServices from "../services/LocalStorageService";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default class componentName extends Component {
   state = {
@@ -16,10 +17,39 @@ export default class componentName extends Component {
   handleInput = (e, keyText) => {
     const value = e.target.value;
     this.setState({
-      [keyText]: value,
-      errorStatus: false,
-      sucefullStatus: false,
-      message: ""
+      [keyText]: value
+    });
+  };
+
+  modalShowError = (title, message) => {
+    confirmAlert({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          label: "Okey"
+        }
+      ]
+    });
+  };
+
+  redirict = () => {
+    this.props.history.push("/ApplicantTable");
+  };
+
+  modalShow = () => {
+    confirmAlert({
+      title: "Registro exitoso",
+      message: "Desea crear un nuevo regitro?",
+      buttons: [
+        {
+          label: "Yes"
+        },
+        {
+          label: "No",
+          onClick: () => this.redirict()
+        }
+      ]
     });
   };
 
@@ -40,40 +70,31 @@ export default class componentName extends Component {
     );
     if (response.status === 200) {
       this.setState({
-        errorStatus: false,
-        sucefullStatus: true,
-        message: "Alerta registrada con exito",
         identification: "",
-        date: "",
+        Date: "",
         description: "",
         names: "",
         surnames: "",
         applicant: ""
       });
+      this.modalShow();
     } else if (response.status === 304) {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "El aspirante ya posee una alerta"
-      });
+      this.modalShowError("Error", "El aspirante ya posee una alerta");
     } else if (response.status === 406) {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "La fecha no es valida, por favor verifique"
-      });
+      this.modalShowError(
+        "Error",
+        "La fecha no es valida, por favor verifique"
+      );
     } else if (response.status === 204) {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "No existe un aspirante relacionado con el número de cedula"
-      });
+      this.modalShowError(
+        "Error",
+        "No existe un aspirante relacionado con el número de cedula"
+      );
     } else {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "Error al realizar el registro, intente de nuevo"
-      });
+      this.modalShowError(
+        "Error",
+        "Error al realizar el registro, intente de nuevo"
+      );
     }
   };
 
@@ -118,13 +139,6 @@ export default class componentName extends Component {
             </div>{" "}
           </div>{" "}
           <div className=" col-md-6">
-            {" "}
-            {this.state.errorStatus && (
-              <Mensaje message={this.state.message} property="error" />
-            )}{" "}
-            {this.state.sucefullStatus && (
-              <Mensaje message={this.state.message} property="succesfull" />
-            )}{" "}
             <button type="submit" className="btn btn-primary ">
               Submit{" "}
             </button>{" "}

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import Mensaje from "../components/Message";
 import UploadFile from "../components/UploadFile";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default class componentName extends Component {
   state = {
-    sucefullStatus: false,
-    errorStatus: false,
-    message: "",
     cedula: "",
     nombres: "",
     apellidos: "",
@@ -25,10 +23,19 @@ export default class componentName extends Component {
   handleInput = (e, keyText) => {
     const value = e.target.value;
     this.setState({
-      [keyText]: value,
-      errorStatus: false,
-      sucefullStatus: false,
-      message: ""
+      [keyText]: value
+    });
+  };
+
+  modalShow = (title, message) => {
+    confirmAlert({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          label: "Okey"
+        }
+      ]
     });
   };
 
@@ -47,9 +54,6 @@ export default class componentName extends Component {
     );
     if (response.status === 201) {
       this.setState({
-        sucefullStatus: true,
-        errorStatus: false,
-        message: "Usuario registrado con exito",
         cedula: "",
         nombres: "",
         apellidos: "",
@@ -63,30 +67,18 @@ export default class componentName extends Component {
         calificacion: "",
         origen: ""
       });
+      this.modalShow("Exito", "Usuario registrado con exito");
     } else if (response.status === 200) {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "Usuario ya esta registrado en nuestra DB"
-      });
+      this.modalShow("Error", "Usuario ya esta registrado en nuestra DB");
     } else if (response.status === 400) {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "Usuario ya registrado en la base de datos"
-      });
+      this.modalShow("Error", "Usuario ya registrado en la base de datos");
     } else if (response.status === 406) {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "Por favor ingrese una fecha valida"
-      });
+      this.modalShow("Error", "Por favor ingrese una fecha valida");
     } else {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "Error al realizar el registro, intente de nuevo"
-      });
+      this.modalShow(
+        "Error",
+        "Error al realizar el registro, intente de nuevo"
+      );
     }
   };
 
@@ -275,12 +267,6 @@ export default class componentName extends Component {
               </label>{" "}
             </div>{" "}
           </div>{" "}
-          {this.state.errorStatus && (
-            <Mensaje message={this.state.message} property="error" />
-          )}{" "}
-          {this.state.sucefullStatus && (
-            <Mensaje message={this.state.message} property="succesfull" />
-          )}{" "}
           <button type="submit" className="btn btn-primary ">
             Submit{" "}
           </button>{" "}

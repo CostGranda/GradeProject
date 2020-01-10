@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
-import Mensaje from "../components/Message";
 import localServices from "../services/LocalStorageService";
 import moment from "moment";
 import UploadFile from "../components/UploadFile";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default class componentName extends Component {
   state = {
@@ -25,10 +26,36 @@ export default class componentName extends Component {
   handleInput = (e, keyText) => {
     const value = e.target.value;
     this.setState({
-      [keyText]: value,
-      errorStatus: false,
-      sucefullStatus: false,
-      message: ""
+      [keyText]: value
+    });
+  };
+
+  modalShowError = (title, message) => {
+    confirmAlert({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          label: "Okey"
+        }
+      ]
+    });
+  };
+
+  redirict = () => {
+    this.props.history.push("/Empty");
+  };
+
+  modalShow = () => {
+    confirmAlert({
+      title: "Modificacion exitosa",
+      message: "",
+      buttons: [
+        {
+          label: "Okey",
+          onClick: () => this.redirict()
+        }
+      ]
     });
   };
 
@@ -78,9 +105,6 @@ export default class componentName extends Component {
       );
       if (response.status === 200) {
         this.setState({
-          sucefullStatus: true,
-          errorStatus: false,
-          message: "Se ah realizado el cambio con exito",
           cedula: "",
           nombres: "",
           apellidos: "",
@@ -95,39 +119,30 @@ export default class componentName extends Component {
           origen: "",
           cv: ""
         });
+        this.modalShow();
       } else if (response.status === 400) {
-        this.setState({
-          errorStatus: true,
-          sucefullStatus: false,
-          message: "No existe el aspirante en la DB"
-        });
+        this.modalShowError("Error", "No existe el aspirante en la DB");
       } else if (response.status === 406) {
-        this.setState({
-          errorStatus: true,
-          sucefullStatus: false,
-          message:
-            "La fecha de disponibilidad debe de llevar un valor, debido a que tiene asociada una alerta"
-        });
+        this.modalShowError(
+          "Error",
+          "La fecha de disponibilidad debe de llevar un valor, debido a que tiene asociada una alerta"
+        );
       } else if (response.status === 409) {
-        this.setState({
-          errorStatus: true,
-          sucefullStatus: false,
-          message:
-            "La fecha de disponibilidad ingresada debe ser mayor a la actual"
-        });
+        this.modalShowError(
+          "Error",
+          "La fecha de disponibilidad ingresada debe ser mayor a la actual"
+        );
       } else {
-        this.setState({
-          errorStatus: true,
-          sucefullStatus: false,
-          message: "No se puede realizar el cambio, intente de nuevo"
-        });
+        this.modalShowError(
+          "Error",
+          "No se puede realizar el cambio, intente de nuevo"
+        );
       }
     } catch {
-      this.setState({
-        errorStatus: true,
-        sucefullStatus: false,
-        message: "No se puede realizar el cambio, intente de nuevo"
-      });
+      this.modalShowError(
+        "Error",
+        "No se puede realizar el cambio, intente de nuevo"
+      );
     }
   };
 
@@ -366,12 +381,6 @@ export default class componentName extends Component {
             </div>
           </div>
           <div className=" col-md-6">
-            {this.state.errorStatus && (
-              <Mensaje message={this.state.message} property="error" />
-            )}
-            {this.state.sucefullStatus && (
-              <Mensaje message={this.state.message} property="succesfull" />
-            )}
             <button type="submit" className="btn btn-primary ">
               Submit
             </button>
