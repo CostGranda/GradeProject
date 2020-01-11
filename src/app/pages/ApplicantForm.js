@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UploadFile from "../components/UploadFile";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { BASE_ENDPOINT } from "../../constanst";
 
 export default class componentName extends Component {
   state = {
@@ -41,17 +42,14 @@ export default class componentName extends Component {
 
   registre = async e => {
     e.preventDefault();
-    const response = await fetch(
-      "https://happy-test2.herokuapp.com/api/applicants",
-      {
-        method: "POST",
-        body: JSON.stringify(this.state),
-        headers: {
-          "content-type": "application/json"
-        },
-        mode: "cors"
-      }
-    );
+    const response = await fetch(`${BASE_ENDPOINT}applicants`, {
+      method: "POST",
+      body: JSON.stringify(this.state),
+      headers: {
+        "content-type": "application/json"
+      },
+      mode: "cors"
+    });
     if (response.status === 201) {
       this.setState({
         cedula: "",
@@ -258,7 +256,7 @@ export default class componentName extends Component {
                 I have read and accept the{" "}
                 <a
                   target="_blank"
-                  href="https://happy-test2.herokuapp.com/api/terms"
+                  href="http://ria-env-2.vvpamseyk3.sa-east-1.elasticbeanstalk.com/api/terms"
                 >
                   {" "}
                   Terms and conditions{" "}

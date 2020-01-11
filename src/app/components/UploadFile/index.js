@@ -1,18 +1,16 @@
 import React from "react";
+import { BASE_ENDPOINT } from "../../../constanst";
 
 function UploadFile({ cedula, setCv }) {
   const handleFile = async e => {
     const file = e.target.files[0];
     let formData = new FormData();
     formData.append("file", file);
-    const response = await fetch(
-      `https://happy-test2.herokuapp.com/api/upload/${cedula}`,
-      {
-        method: "PUT",
-        body: formData,
-        mode: "cors"
-      }
-    );
+    const response = await fetch(`${BASE_ENDPOINT}upload/${cedula}`, {
+      method: "PUT",
+      body: formData,
+      mode: "cors"
+    });
     if (response.ok) {
       const dataResponse = await response.json();
       setCv(dataResponse.cv);

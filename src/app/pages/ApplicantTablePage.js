@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Table from "../components/Table";
 import localServices from "../services/LocalStorageService";
+import { BASE_ENDPOINT } from "../../constanst";
 
 import "./Empty.scss";
 
@@ -45,16 +46,13 @@ function ApplicantTablePage() {
 
   const fetchData = async () => {
     const token = localServices.getCurrentAccountId("token");
-    const response = await fetch(
-      "https://happy-test2.herokuapp.com/api/alerts",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token.token}`
-        },
-        mode: "cors"
-      }
-    );
+    const response = await fetch(`${BASE_ENDPOINT}alerts`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token.token}`
+      },
+      mode: "cors"
+    });
     let data = await response.json();
     const newData = data.map(item => ({
       ...item,

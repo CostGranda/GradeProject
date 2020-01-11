@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./UpdateForm.scss";
+import { BASE_ENDPOINT } from "../../constanst";
 import localServices from "../services/LocalStorageService";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -56,18 +57,15 @@ export default class componentName extends Component {
   updateRow = async event => {
     event.preventDefault(); //Detener la funcion por defecto
     const token = localServices.getCurrentAccountId("token");
-    const response = await fetch(
-      "https://happy-test2.herokuapp.com/api/alerts",
-      {
-        method: "POST",
-        body: JSON.stringify(this.state),
-        headers: {
-          Authorization: `Bearer ${token.token}`,
-          "content-type": "application/json"
-        },
-        mode: "cors"
-      }
-    );
+    const response = await fetch(`${BASE_ENDPOINT}alerts`, {
+      method: "POST",
+      body: JSON.stringify(this.state),
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+        "content-type": "application/json"
+      },
+      mode: "cors"
+    });
     if (response.status === 200) {
       this.setState({
         identification: "",

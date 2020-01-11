@@ -1,4 +1,5 @@
 import React from "react";
+import { BASE_ENDPOINT } from "../../../constanst";
 import { useTable, useFilters } from "react-table";
 import { NavLink } from "react-router-dom";
 import fuzzyTextFilterFn from "./components/Fuzzy";
@@ -70,8 +71,8 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
         : item.original.cedula;
 
       const URL = item.original.identification
-        ? "https://happy-test2.herokuapp.com/api/alerts/"
-        : "https://happy-test2.herokuapp.com/api/applicants/";
+        ? `${BASE_ENDPOINT}alerts/`
+        : `${BASE_ENDPOINT}applicants/`;
       const response = await fetch(`${URL}${id}`, {
         method: "DELETE",
         headers: {

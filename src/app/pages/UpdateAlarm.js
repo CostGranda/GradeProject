@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { BASE_ENDPOINT } from "../../constanst";
 import localServices from "../services/LocalStorageService";
-import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
@@ -60,7 +60,7 @@ export default class componentName extends Component {
 
   getAlarms = async id => {
     const token = localServices.getCurrentAccountId("token");
-    const URL = `https://happy-test2.herokuapp.com/api/alerts/${id}`;
+    const URL = `${BASE_ENDPOINT}alerts/${id}`;
     const response = await fetch(`${URL}`, {
       method: "GET",
       headers: {
@@ -84,18 +84,15 @@ export default class componentName extends Component {
     e.preventDefault(); //Detener la funcion por defecto
     const token = localServices.getCurrentAccountId("token");
     try {
-      const response = await fetch(
-        "https://happy-test2.herokuapp.com/api/alerts",
-        {
-          method: "PUT",
-          body: JSON.stringify(this.state),
-          headers: {
-            Authorization: `Bearer ${token.token}`,
-            "content-type": "application/json"
-          },
-          mode: "cors"
-        }
-      );
+      const response = await fetch(`${BASE_ENDPOINT}alerts`, {
+        method: "PUT",
+        body: JSON.stringify(this.state),
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+          "content-type": "application/json"
+        },
+        mode: "cors"
+      });
       if (response.status === 200) {
         this.setState({
           identification: "",

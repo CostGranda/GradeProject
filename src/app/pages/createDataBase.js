@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BASE_ENDPOINT } from "../../constanst";
 import "./UpdateForm.scss";
 import localServices from "../services/LocalStorageService";
 import UploadFile from "../components/UploadFile";
@@ -64,18 +65,15 @@ export default class componentName extends Component {
   updateRow = async event => {
     event.preventDefault(); //Detener la funcion por defecto
     const token = localServices.getCurrentAccountId("token");
-    const response = await fetch(
-      "https://happy-test2.herokuapp.com/api/applicants",
-      {
-        method: "POST",
-        body: JSON.stringify(this.state),
-        headers: {
-          Authorization: `Bearer ${token.token}`,
-          "content-type": "application/json"
-        },
-        mode: "cors"
-      }
-    );
+    const response = await fetch(`${BASE_ENDPOINT}applicants`, {
+      method: "POST",
+      body: JSON.stringify(this.state),
+      headers: {
+        Authorization: `Bearer ${token.token}`,
+        "content-type": "application/json"
+      },
+      mode: "cors"
+    });
     if (response.status === 201) {
       this.setState({
         cedula: "",

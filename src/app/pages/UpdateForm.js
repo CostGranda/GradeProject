@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { BASE_ENDPOINT } from "../../constanst";
 import "./UpdateForm.scss";
 import localServices from "../services/LocalStorageService";
-import moment from "moment";
 import UploadFile from "../components/UploadFile";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -68,7 +68,7 @@ export default class componentName extends Component {
 
   getAplicant = async id => {
     const token = localServices.getCurrentAccountId("token");
-    const URL = `https://happy-test2.herokuapp.com/api/applicants/cedula/${id}`;
+    const URL = `${BASE_ENDPOINT}applicants/cedula/${id}`;
     const response = await fetch(`${URL}`, {
       method: "GET",
       headers: {
@@ -91,18 +91,15 @@ export default class componentName extends Component {
     e.preventDefault(); //Detener la funcion por defecto
     const token = localServices.getCurrentAccountId("token");
     try {
-      const response = await fetch(
-        "https://happy-test2.herokuapp.com/api/applicants",
-        {
-          method: "PUT",
-          body: JSON.stringify(this.state),
-          headers: {
-            Authorization: `Bearer ${token.token}`,
-            "content-type": "application/json"
-          },
-          mode: "cors"
-        }
-      );
+      const response = await fetch(`${BASE_ENDPOINT}applicants`, {
+        method: "PUT",
+        body: JSON.stringify(this.state),
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+          "content-type": "application/json"
+        },
+        mode: "cors"
+      });
       if (response.status === 200) {
         this.setState({
           cedula: "",

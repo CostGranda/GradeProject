@@ -3,7 +3,7 @@ import SelectColumnFilter from "../components/Table/components/SelectColumnFilte
 import SliderColumnFilter from "../components/Table/components/SliderColumnFilter";
 import Table from "../components/Table";
 import localServices from "../services/LocalStorageService";
-import moment from "moment";
+import { BASE_ENDPOINT } from "../../constanst";
 
 import "./Empty.scss";
 
@@ -86,16 +86,13 @@ function EmptyPage() {
 
   const fetchData = async () => {
     const token = localServices.getCurrentAccountId("token");
-    const response = await fetch(
-      "https://happy-test2.herokuapp.com/api/applicants",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token.token}`
-        },
-        mode: "cors"
-      }
-    );
+    const response = await fetch(`${BASE_ENDPOINT}applicants`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token.token}`
+      },
+      mode: "cors"
+    });
     let data = await response.json();
     const newData = data.map(item => ({
       ...item,
