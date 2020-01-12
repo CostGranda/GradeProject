@@ -1,12 +1,13 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import Menu from "./components/Menu";
-import MenuGeneral from "./components/MenuGeneral";
-import MenuLogin from "./components/MenuLogin";
-import Footer from "./components/Footer";
-import "./CSS/styles.css";
-import Routes from "./components/Routes/Routes";
-import localServices from "./services/LocalStorageService";
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Menu from './components/Menu';
+import MenuGeneral from './components/MenuGeneral';
+import MenuLogin from './components/MenuLogin';
+import Footer from './components/Footer';
+import './CSS/styles.css';
+import Routes from './components/Routes/Routes';
+import localServices from './services/LocalStorageService';
+import './index.scss';
 
 export default class App extends Component {
   state = {
@@ -15,8 +16,8 @@ export default class App extends Component {
   };
 
   handleChangeState = authed => {
-    const role = localServices.getCurrentAccountId("role");
-    if (role.role === "Admin") {
+    const role = localServices.getCurrentAccountId('role');
+    if (role.role === 'Admin') {
       this.setState({ role: true });
     } else {
       this.setState({ role: false });
@@ -25,21 +26,21 @@ export default class App extends Component {
   };
 
   logOut = () => {
-    localServices.removeCurrentAccountId("token");
-    localServices.removeCurrentAccountId("role");
-    localServices.removeCurrentAccountId("user");
+    localServices.removeCurrentAccountId('token');
+    localServices.removeCurrentAccountId('role');
+    localServices.removeCurrentAccountId('user');
     this.setState({ authed: false });
     this.setState({ role: false });
   };
 
   componentDidMount() {
-    const isAuted = localServices.getCurrentAccountId("user");
+    const isAuted = localServices.getCurrentAccountId('user');
     if (isAuted && isAuted.usuario) {
       this.setState({ authed: true });
     }
-    const role = localServices.getCurrentAccountId("role");
+    const role = localServices.getCurrentAccountId('role');
     if (role !== null) {
-      if (role.role === "Admin") {
+      if (role.role === 'Admin') {
         this.setState({ role: true });
       } else {
         this.setState({ role: false });

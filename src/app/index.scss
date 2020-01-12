@@ -1,0 +1,11 @@
+.react-confirm-alert-overlay {
+  // background: green;\\
+
+  &--success {
+    background-color: rgba(0, 255, 0, 0.2);
+  }
+
+  &--error {
+    background-color: rgba(255, 0, 0, 0.2);
+  }
+}

@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { BASE_ENDPOINT } from "../../constanst";
-import localServices from "../services/LocalStorageService";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+import React, { Component } from 'react';
+import { BASE_ENDPOINT } from '../../constanst';
+import localServices from '../services/LocalStorageService';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import './UpdateAlarm.scss';
 
 export default class componentName extends Component {
   state = {
-    identification: "",
-    description: "",
-    Date: ""
+    identification: '',
+    description: '',
+    Date: ''
   };
 
   handleInput = (e, keyText) => {
@@ -24,27 +25,33 @@ export default class componentName extends Component {
       message: message,
       buttons: [
         {
-          label: "Okey"
+          label: 'Okey'
         }
       ]
     });
+
+    const overlay = document.querySelector('.react-confirm-alert-overlay');
+    overlay.classList.add('react-confirm-alert-overlay--error');
   };
 
   redirict = () => {
-    this.props.history.push("/ApplicantTable");
+    this.props.history.push('/ApplicantTable');
   };
 
   modalShow = () => {
     confirmAlert({
-      title: "Modificacion exitosa",
-      message: "",
+      title: 'Modificacion exitosa',
+      message: '',
       buttons: [
         {
-          label: "Okey",
+          label: 'Okey',
           onClick: () => this.redirict()
         }
       ]
     });
+
+    const overlay = document.querySelector('.react-confirm-alert-overlay');
+    overlay.classList.add('react-confirm-alert-overlay--success');
   };
 
   updateRow = e => {
@@ -53,26 +60,26 @@ export default class componentName extends Component {
 
   componentDidMount() {
     let locationActual = window.location.pathname;
-    const path = locationActual.split("/");
+    const path = locationActual.split('/');
     const id = path[2];
     this.getAlarms(id);
   }
 
   getAlarms = async id => {
-    const token = localServices.getCurrentAccountId("token");
+    const token = localServices.getCurrentAccountId('token');
     const URL = `${BASE_ENDPOINT}alerts/${id}`;
     const response = await fetch(`${URL}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token.token}`
       },
-      mode: "cors"
+      mode: 'cors'
     });
 
     let data = await response.json();
     this.setState(data);
     if (this.state.Date != null) {
-      let date = this.state.Date.split("T");
+      let date = this.state.Date.split('T');
       date = date[0];
       this.setState({
         Date: date
@@ -82,83 +89,84 @@ export default class componentName extends Component {
 
   updateAlert = async e => {
     e.preventDefault(); //Detener la funcion por defecto
-    const token = localServices.getCurrentAccountId("token");
+    const token = localServices.getCurrentAccountId('token');
     try {
       const response = await fetch(`${BASE_ENDPOINT}alerts`, {
-        method: "PUT",
+        method: 'PUT',
         body: JSON.stringify(this.state),
         headers: {
           Authorization: `Bearer ${token.token}`,
-          "content-type": "application/json"
+          'content-type': 'application/json'
         },
-        mode: "cors"
+        mode: 'cors'
       });
       if (response.status === 200) {
         this.setState({
-          identification: "",
-          description: "",
-          Date: ""
+          identification: '',
+          description: '',
+          Date: ''
         });
         this.modalShow();
       } else if (response.status === 406) {
         this.modalShowError(
-          "Error",
-          "El aspirante no tiene una fecha de disponibilidad"
+          'Error',
+          'El aspirante no tiene una fecha de disponibilidad'
         );
       } else if (response.status === 202) {
-        this.modalShowError("Error", "Ingrese una fecha diferente");
+        this.modalShowError('Error', 'Ingrese una fecha diferente');
       } else {
         this.modalShowError(
-          "Error",
-          "No se puede realizar el cambio, intente de nuevo"
+          'Error',
+          'No se puede realizar el cambio, intente de nuevo'
         );
       }
     } catch {
       this.modalShowError(
-        "Error",
-        "No se puede realizar el cambio, intente de nuevo"
+        'Error',
+        'No se puede realizar el cambio, intente de nuevo'
       );
     }
   };
 
   render() {
     return (
-      <div>
+      <div className='alarm'>
+        <h3 className='update-title'> Update Alarm </h3>{' '}
         <form onSubmit={this.updateAlert}>
-          <div className="form-row col-md-6">
-            <label htmlFor="inputId4"> Identification number </label>{" "}
+          <div className='form-row col-md-6'>
+            <label htmlFor='inputId4'> Identification number </label>{' '}
             <input
               value={this.state.identification}
-              onChange={e => this.handleInput(e, "identification")}
-              type="number"
+              onChange={e => this.handleInput(e, 'identification')}
+              type='number'
               disabled
-              className="form-control"
+              className='form-control'
             />
-          </div>{" "}
-          <div className="form-group col-md-6">
-            <label htmlFor="inputDate"> Date </label>{" "}
+          </div>{' '}
+          <div className='form-group col-md-6'>
+            <label htmlFor='inputDate'> Date </label>{' '}
             <input
-              type="date"
-              className="form-control"
+              type='date'
+              className='form-control'
               value={this.state.Date}
-              onChange={e => this.handleInput(e, "Date")}
-            />{" "}
-          </div>{" "}
-          <div className="form-group col-md-6">
-            <label htmlFor="exampleFormControlTextarea2"> Description </label>{" "}
+              onChange={e => this.handleInput(e, 'Date')}
+            />{' '}
+          </div>{' '}
+          <div className='form-group col-md-6'>
+            <label htmlFor='exampleFormControlTextarea2'> Description </label>{' '}
             <textarea
               value={this.state.description}
-              onChange={e => this.handleInput(e, "description")}
-              class="form-control rounded-0"
-              rows="3"
-            ></textarea>{" "}
-          </div>{" "}
-          <div className="content-center">
-            <button type="submit" className="btn btn-primary ">
-              Submit{" "}
-            </button>{" "}
-          </div>{" "}
-        </form>{" "}
+              onChange={e => this.handleInput(e, 'description')}
+              class='form-control rounded-0'
+              rows='3'
+            ></textarea>{' '}
+          </div>{' '}
+          <div className='content-center'>
+            <button type='submit' className='btn btn-primary '>
+              Submit{' '}
+            </button>{' '}
+          </div>{' '}
+        </form>{' '}
       </div>
     );
   }
