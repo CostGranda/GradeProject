@@ -36,7 +36,7 @@ export default class componentName extends Component {
       message: message,
       buttons: [
         {
-          label: "Okey"
+          label: "Exit"
         }
       ]
     });
@@ -52,7 +52,7 @@ export default class componentName extends Component {
   modalShow = () => {
     confirmAlert({
       title: "Successful registration",
-      message: "Do you want to create a new record",
+      message: "Do you want to create a new record?",
       buttons: [
         {
           label: "Yes"
