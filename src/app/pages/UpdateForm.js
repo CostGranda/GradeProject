@@ -36,7 +36,7 @@ export default class componentName extends Component {
       message: message,
       buttons: [
         {
-          label: "Okey"
+          label: "Exit"
         }
       ]
     });
@@ -51,11 +51,11 @@ export default class componentName extends Component {
 
   modalShow = () => {
     confirmAlert({
-      title: "Modificacion exitosa",
+      title: "Updated successfully",
       message: "",
       buttons: [
         {
-          label: "Okey",
+          label: "Exit",
           onClick: () => this.redirict()
         }
       ]
@@ -124,27 +124,27 @@ export default class componentName extends Component {
         });
         this.modalShow();
       } else if (response.status === 400) {
-        this.modalShowError("Error", "No existe el aspirante en la DB");
+        this.modalShowError("Error", "The applicant don't exist");
       } else if (response.status === 406) {
         this.modalShowError(
           "Error",
-          "La fecha de disponibilidad debe de llevar un valor, debido a que tiene asociada una alerta"
+          "Availability date is mandatory when there is an associated alert"
         );
       } else if (response.status === 409) {
         this.modalShowError(
           "Error",
-          "La fecha de disponibilidad ingresada debe ser mayor a la actual"
+          "The availability date entered must be greater than the current one"
         );
       } else {
         this.modalShowError(
           "Error",
-          "No se puede realizar el cambio, intente de nuevo"
+          "Can't make change, try again"
         );
       }
     } catch {
       this.modalShowError(
         "Error",
-        "No se puede realizar el cambio, intente de nuevo"
+        "Can't make change, try again"
       );
     }
   };

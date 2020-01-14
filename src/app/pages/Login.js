@@ -44,7 +44,7 @@ export default class Login extends Component {
       }
     } catch (error) {
       this.setState({
-        error: "Usuario y/o Contraseña no válidos",
+        error: "Invalid username or password",
         errorStatus: true
       });
     }

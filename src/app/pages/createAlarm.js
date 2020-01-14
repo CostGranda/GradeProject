@@ -43,8 +43,8 @@ export default class componentName extends Component {
 
   modalShow = () => {
     confirmAlert({
-      title: 'Registro exitoso',
-      message: 'Desea crear un nuevo regitro?',
+      title: 'Successful registration',
+      message: 'Do you want to create a new record?',
       buttons: [
         {
           label: 'Yes'
@@ -83,21 +83,21 @@ export default class componentName extends Component {
       });
       this.modalShow();
     } else if (response.status === 304) {
-      this.modalShowError('Error', 'El aspirante ya posee una alerta');
+      this.modalShowError('Error', 'The applicant already has an associated alert');
     } else if (response.status === 406) {
       this.modalShowError(
         'Error',
-        'La fecha no es valida, por favor verifique'
+        "The date isn't valid, please verify"
       );
     } else if (response.status === 204) {
       this.modalShowError(
         'Error',
-        'No existe un aspirante relacionado con el número de cedula'
+        "The ID isn't related to any applicant"
       );
     } else {
       this.modalShowError(
         'Error',
-        'Error al realizar el registro, intente de nuevo'
+        'Registration failed, try again'
       );
     }
   };

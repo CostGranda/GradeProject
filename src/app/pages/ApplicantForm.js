@@ -67,25 +67,25 @@ export default class componentName extends Component {
           origen: "",
           cv: ""
         });
-        this.modalShow("Exito", "Se ha actualizado la información");
+        this.modalShow("Success", "Information updated successfully");
       } else if (response.status === 400) {
-        this.modalShow("Error", "No existe el aspirante en la DB");
+        this.modalShow("Error", "The applicant don't exist");
       }
     } catch {
       this.modalShow(
         "Error",
-        "No se puede realizar el cambio, intente de nuevo"
+        "Can't make change, try again"
       );
     }
   };
 
   modalShowPut = () => {
     confirmAlert({
-      title: "Ya esta registrado",
-      message: "Desea actualizar sus datos en la DB",
+      title: "User already exist",
+      message: "Do you want update your information in the database?",
       buttons: [
         {
-          label: "Si",
+          label: "Yes",
           onClick: () => this.actualizar()
         },
         {
@@ -120,17 +120,17 @@ export default class componentName extends Component {
         calificacion: "",
         origen: ""
       });
-      this.modalShow("Exito", "Usuario registrado con exito");
+      this.modalShow("Success", "User registered successfully");
     } else if (response.status === 200) {
       this.modalShowPut();
     } else if (response.status === 400) {
       this.modalShowPut();
     } else if (response.status === 406) {
-      this.modalShow("Error", "Por favor ingrese una fecha valida");
+      this.modalShow("Error", "Please enter a valid date");
     } else {
       this.modalShow(
         "Error",
-        "Error al realizar el registro, intente de nuevo"
+        "Registration failed, try again"
       );
     }
   };

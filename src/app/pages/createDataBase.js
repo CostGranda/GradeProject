@@ -51,8 +51,8 @@ export default class componentName extends Component {
 
   modalShow = () => {
     confirmAlert({
-      title: "Registro exitoso",
-      message: "Desea crear un nuevo regitro?",
+      title: "Successful registration",
+      message: "Do you want to create a new record",
       buttons: [
         {
           label: "Yes"
@@ -98,15 +98,15 @@ export default class componentName extends Component {
       });
       this.modalShow();
     } else if (response.status === 200) {
-      this.modalShowError("Error", "Usuario ya esta registrado en nuestra DB");
+      this.modalShowError("Error", "User already exist");
     } else if (response.status === 400) {
-      this.modalShowError("Error", "Usuario ya registrado en la base de datos");
+      this.modalShowError("Error", "User already exist");
     } else if (response.status === 406) {
-      this.modalShowError("Error", "Por favor ingrese una fecha valida");
+      this.modalShowError("Error", "Please enter a valid date");
     } else {
       this.modalShowError(
         "Error",
-        "Error al realizar el registro, intente de nuevo"
+        "Registration failed, try again"
       );
     }
   };

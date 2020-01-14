@@ -40,11 +40,11 @@ export default class componentName extends Component {
 
   modalShow = () => {
     confirmAlert({
-      title: 'Modificacion exitosa',
+      title: 'Updated successfully',
       message: '',
       buttons: [
         {
-          label: 'Okey',
+          label: 'Exit',
           onClick: () => this.redirict()
         }
       ]
@@ -110,20 +110,20 @@ export default class componentName extends Component {
       } else if (response.status === 406) {
         this.modalShowError(
           'Error',
-          'El aspirante no tiene una fecha de disponibilidad'
+          "The applicant doesn't have an availability date"
         );
       } else if (response.status === 202) {
-        this.modalShowError('Error', 'Ingrese una fecha diferente');
+        this.modalShowError('Error', 'Enter other date');
       } else {
         this.modalShowError(
           'Error',
-          'No se puede realizar el cambio, intente de nuevo'
+          'Cannot make change, try again'
         );
       }
     } catch {
       this.modalShowError(
         'Error',
-        'No se puede realizar el cambio, intente de nuevo'
+        'Cannot make change, try again'
       );
     }
   };
