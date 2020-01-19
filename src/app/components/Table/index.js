@@ -82,19 +82,19 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
       });
       let data = await response.json();
       if (response.status === 200) {
-        const title = "Eliminado";
-        const message = "Se elemino con exito";
+        const title = "Deleted";
+        const message = "It's successfully removed";
         modalInfo(title, message);
         setReload(true);
       } else if (response.status === 202) {
         modalInfo(
-          "Error eliminando",
-          "El registro tiene una alarma asociada, no puede borrarse"
+          "Error",
+          "The record has an associated alarm, it cannot be deleted"
         );
       } else {
         modalInfo(
-          "Error eliminando",
-          "No se pudo realizar la eliminación, intente nuevamente"
+          "Error",
+          "Failed to perform deletion, try again"
         );
       }
     };
