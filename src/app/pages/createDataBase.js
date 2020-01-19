@@ -93,7 +93,7 @@ export default class componentName extends Component {
         comentarios: "",
         state: "",
         calificacion: "",
-        origen: "",
+        origen: "Manual",
         cv: ""
       });
       this.modalShow();
@@ -104,10 +104,7 @@ export default class componentName extends Component {
     } else if (response.status === 406) {
       this.modalShowError("Error", "Please enter a valid date");
     } else {
-      this.modalShowError(
-        "Error",
-        "Registration failed, try again"
-      );
+      this.modalShowError("Error", "Registration failed, try again");
     }
   };
 

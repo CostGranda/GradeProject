@@ -17,7 +17,7 @@ export default class componentName extends Component {
     disponibilidad: "",
     comentarios: "",
     state: "",
-    calificacion: "0",
+    calificacion: "1",
     origen: "Auto",
     cv: ""
   };
@@ -72,10 +72,7 @@ export default class componentName extends Component {
         this.modalShow("Error", "The applicant don't exist");
       }
     } catch {
-      this.modalShow(
-        "Error",
-        "Can't make change, try again"
-      );
+      this.modalShow("Error", "Can't make change, try again");
     }
   };
 
@@ -128,10 +125,7 @@ export default class componentName extends Component {
     } else if (response.status === 406) {
       this.modalShow("Error", "Please enter a valid date");
     } else {
-      this.modalShow(
-        "Error",
-        "Registration failed, try again"
-      );
+      this.modalShow("Error", "Registration failed, try again");
     }
   };
 
