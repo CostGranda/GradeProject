@@ -57,7 +57,7 @@ export default function Menu({ logOut }) {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" target="_blank" href="https://happy-test2.herokuapp.com/api/terms/manual">
                   Help
                 </a>
                 <div className="dropdown-item" onClick={logOut}>
