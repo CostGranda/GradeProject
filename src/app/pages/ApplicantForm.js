@@ -131,7 +131,7 @@ export default class componentName extends Component {
 
   render() {
     return (
-      <div class="applicant">
+      <div className="applicant">
         <h3 className="update-title">Register Applicant</h3>
         <form onSubmit={this.registre}>
           <div className="form-row col-md-6">
