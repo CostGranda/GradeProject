@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN yarn && yarn cache clean
+RUN yarn install --network-timeout 1000000 && yarn cache clean
 
 EXPOSE 3000
 
