@@ -306,7 +306,7 @@ export default class componentName extends Component {
                 I have read and accept the{" "}
                 <a
                   target="_blank"
-                  href="http://192.168.1.122/api/terms"
+                  href="http://192.168.1.122:3100/api/terms"
                 >
                   {" "}
                   Terms and conditions{" "}
