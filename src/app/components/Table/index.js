@@ -148,7 +148,7 @@ function Table({ columns, data, createRoute, updateRoute, setReload }) {
                     <td scope="row" {...cell.getCellProps()}>
                       {cell.column.id === "cv" ? (
                         <a
-                          href={cell.value}
+                          href={"192.168.1.122:3100/"+cell.value}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
