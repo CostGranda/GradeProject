@@ -306,7 +306,7 @@ export default class componentName extends Component {
                 I have read and accept the{" "}
                 <a
                   target="_blank"
-                  href="http://ria-env-2.vvpamseyk3.sa-east-1.elasticbeanstalk.com/api/terms"
+                  href="http://192.168.1.122/api/terms"
                 >
                   {" "}
                   Terms and conditions{" "}
