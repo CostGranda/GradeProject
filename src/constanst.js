@@ -1,3 +1,3 @@
 export const BASE_ENDPOINT =
-  "http://localhost:3100/api/"
+  "http://190.248.92.106:3100/api/"
 

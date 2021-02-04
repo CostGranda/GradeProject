@@ -25,7 +25,7 @@ function UploadFile({ cedula, setCv }) {
   return (
     <div className="form-row col-md-6">
       <div className="custom-group col-md-12">
-        <label htmlFor="inputFile">Choose file</label>
+        <label htmlFor="inputFile">Subir archivo</label>
         <br></br>
       </div>
       <div className="custom-file col-md-6">
@@ -38,7 +38,7 @@ function UploadFile({ cedula, setCv }) {
         />
         {nameFile === "" ? (
           <label className="custom-file-label" htmlFor="validatedCustomFile">
-            Choose file...
+            Subir archivo...
           </label>
         ) : (
           <label className="custom-file-label" htmlFor="validatedCustomFile">

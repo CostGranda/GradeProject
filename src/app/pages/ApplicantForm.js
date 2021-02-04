@@ -35,7 +35,7 @@ export default class componentName extends Component {
       message: message,
       buttons: [
         {
-          label: "Okey"
+          label: "Listo"
         }
       ]
     });
@@ -67,22 +67,22 @@ export default class componentName extends Component {
           origen: "",
           cv: ""
         });
-        this.modalShow("Success", "Information updated successfully");
+        this.modalShow("Hecho", "Información actualizada satisfactoriamente");
       } else if (response.status === 400) {
-        this.modalShow("Error", "The applicant don't exist");
+        this.modalShow("Error", "El aspirante no está registrado");
       }
     } catch {
-      this.modalShow("Error", "Can't make change, try again");
+      this.modalShow("Error", "No se puede realizar cambios, intente de nuevo");
     }
   };
 
   modalShowPut = () => {
     confirmAlert({
-      title: "User already exist",
-      message: "Do you want update your information in the database?",
+      title: "El aspirante ya existe",
+      message: "¿Quiere actualizar la información en la aplicación?",
       buttons: [
         {
-          label: "Yes",
+          label: "Si",
           onClick: () => this.actualizar()
         },
         {
@@ -117,30 +117,30 @@ export default class componentName extends Component {
         calificacion: "",
         origen: ""
       });
-      this.modalShow("Success", "User registered successfully");
+      this.modalShow("Hecho", "Aspirante registrado satisfactoriamente");
     } else if (response.status === 200) {
       this.modalShowPut();
     } else if (response.status === 400) {
       this.modalShowPut();
     } else if (response.status === 406) {
-      this.modalShow("Error", "Please enter a valid date");
+      this.modalShow("Error", "Por favor ingrese una fecha válida");
     } else {
-      this.modalShow("Error", "Registration failed, try again");
+      this.modalShow("Error", "Registro fallido, intente de nuevo");
     }
   };
 
   render() {
     return (
       <div className="applicant">
-        <h3 className="update-title">Register Applicant</h3>
+        <h3 className="update-title">Registrar Aspirante</h3>
         <form onSubmit={this.registre}>
           <div className="form-row col-md-6">
             <div className="form-group col-md-6">
-              <label> Identification number </label>{" "}
+              <label> Número de identificación </label>{" "}
               <input
                 type="number"
                 className="form-control"
-                placeholder="Identification number"
+                placeholder="Número de identificación"
                 onChange={e => this.handleInput(e, "cedula")}
                 required
                 value={this.state.cedula}
@@ -149,22 +149,22 @@ export default class componentName extends Component {
           </div>{" "}
           <div className="form-row col-md-6">
             <div className="form-group col-md-6">
-              <label> Names </label>{" "}
+              <label> Nombres </label>{" "}
               <input
                 type="text"
                 className="form-control"
-                placeholder="Names"
+                placeholder="Nombres"
                 onChange={e => this.handleInput(e, "nombres")}
                 required
                 value={this.state.nombres}
               />{" "}
             </div>{" "}
             <div className="form-group col-md-6">
-              <label> Surnames </label>{" "}
+              <label> Apellidos </label>{" "}
               <input
                 type="text"
                 className="form-control"
-                placeholder="Surnames"
+                placeholder="Apellidos"
                 onChange={e => this.handleInput(e, "apellidos")}
                 required
                 value={this.state.apellidos}
@@ -172,36 +172,37 @@ export default class componentName extends Component {
             </div>{" "}
           </div>{" "}
           <div className="form-group col-md-6">
-            <label> Email </label>{" "}
+            <label> Correo electrónico </label>{" "}
             <input
               type="email"
               className="form-control"
-              placeholder="Email"
+              placeholder="Correo electrónico"
               onChange={e => this.handleInput(e, "email")}
               required
               value={this.state.email}
             />{" "}
           </div>{" "}
           <div className="form-group col-md-6">
-            <label> Contact number </label>{" "}
+            <label> Número de contacto </label>{" "}
             <input
               type="number"
               className="form-control"
-              placeholder="Contact number"
+              placeholder="Número de contacto"
               onChange={e => this.handleInput(e, "telefonos")}
               required
               value={this.state.telefonos}
             />{" "}
           </div>{" "}
           <div className="form-group col-md-6">
-            <label> Specialties </label>{" "}
+            <label> Especialidad </label>{" "}
             <select
               onChange={e => this.handleInput(e, "especialidades")}
               className="custom-select"
               required
               value={this.state.especialidades}
             >
-              <option value=""> Choose options... </option>{" "}
+              <option value=""> Opciones... </option>{" "}
+              <option value="Otro"> Otro </option>{" "}
               <option value="ABAP"> ABAP </option>{" "}
               <option value="BC"> BC </option>{" "}
               <option value="BC-STMS"> BC - STMS </option>{" "}
@@ -303,20 +304,20 @@ export default class componentName extends Component {
             <div className="form-check">
               <input className="form-check-input" type="checkbox" required />
               <label className="form-check-label">
-                I have read and accept the{" "}
+                He leído y acepto los{" "}
                 <a
                   target="_blank"
-                  href="http://192.168.1.122:3100/api/terms"
+                  href="http://190.248.92.106:3100/api/terms"
                 >
                   {" "}
-                  Terms and conditions{" "}
+                  Términos y condiciones{" "}
                 </a>
-                and the use of my data in accordance with the Habeas Data Law.{" "}
+                del uso de mi información de acuerdo a la ley de Habeas Data.{" "}
               </label>{" "}
             </div>{" "}
           </div>{" "}
           <button type="submit" className="btn btn-primary ">
-            Submit{" "}
+            Enviar{" "}
           </button>{" "}
         </form>{" "}
       </div>
